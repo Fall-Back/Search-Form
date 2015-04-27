@@ -1,12 +1,29 @@
 /*------------------------------------------------------------------------------------------------*\
-    Sticky Footer  Pattern
+    Fallback Search Form Pattern v0.1
 \*------------------------------------------------------------------------------------------------*/
 
-$fallback--search-form--search-form-bg-color: #bbb !default;
+// Colours:
 
-$fallback--search-form--search-form__field-margin: 5px 0 5px 5px !default;
-$fallback--search-form--search-form__field-padding: 5px !default;
-$fallback--search-form--search-form__field-height: 20px !default;
+$fallback--search-form--bg-color:              #bbb !default;
+$fallback--search-form__field--bg-color:       #eee !default;
+$fallback--search-form__field--bg-color-alt:   #ddd !default;
+$fallback--search-form__submit--bg-color:      #ddd !default;
+$fallback--search-form__submit--bg-color--alt: #ccc !default;
+$fallback--search-form__cancel--bg-color:      #bbb !default;
+$fallback--search-form__cancel--bg-color--alt: #999 !default;
+
+
+// Sizes:
+
+$fallback--search-form__field--height:         20px !default;
+$fallback--search-form__field--spacing:        5px !default;
+
+
+// Fallback PNG's:
+
+$fallback--search-form__submit--png:           "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABTklEQVQ4T6VT21GDQBTNAv9qBaEDSQUij3+pQNMBnUgHagXJPw+3A0kFxg5SAA/P2VlmFtw4ZmQmA7t377nnsREr40mSJMfyEb9Ab7fjOBZ1Xb+Z58xvwUUYhtee570bjcvzbdd191LK07KgAOI4boUQt5j2hWXe933Lfdd1yaRAbY13W1XV5geApv3MZjQGyylkByAOWA/DsG2a5nUmwZieQevephVnHgCws7EQYDCyCRpvbBq1Rz48+uQ3ZCjZ0/N/gEskwKcDZE4RKxIiiqInx3FeUDzCxM0ZEz/ggW81cRHjEQdz+HHgPnQzWsbo26YrBtokRiV5F2wpsFnXJMAzk+XMUcohgwmIjWTA7JGWBPgdo0R9W5alumwzANv0ac+8UAA9ASRDpPLPAARK0zRAM5lccU1TLwJgE6SEePGPt1JMfqN9rqajLwCw/wY2tMxY4fByDwAAAABJRU5ErkJggg==" !default;
+
+
 
 /* -- Basic/fallback layout --------------------------------------------------------------------- */
 
@@ -22,7 +39,7 @@ $fallback--search-form--search-form__field-height: 20px !default;
     /* -- .search-form ---------------------------------------------------------------------------*/
 
     .search-form {
-        background: $fallback--search-form--search-form-bg-color;
+        background: $fallback--search-form--bg-color;
     
 
         display: -webkit-flex;
@@ -34,15 +51,15 @@ $fallback--search-form--search-form__field-height: 20px !default;
                 flex-wrap: wrap;
     }
     
-    .search-form:before,
-    .search-form:after {
-        content: " ";
-        display: table;
-    }
+        .search-form:before,
+        .search-form:after {
+            content: " ";
+            display: table;
+        }
 
-    .search-form:after {
-        clear: both;
-    }
+        .search-form:after {
+            clear: both;
+        }
     
     /* IE7- hacks (can't use MQ else IE8's Respond applies it): */
     .search-form {
@@ -70,14 +87,15 @@ $fallback--search-form--search-form__field-height: 20px !default;
         -webkit-border-radius: 0px;
         border-radius: 0px;
         border: 0;
+        -webkit-border-box: content-box;
+        border-box: content-box;
         
-        @include fallback-rem(margin, $fallback--search-form--search-form__field-margin);
-        @include fallback-rem(padding, $fallback--search-form--search-form__field-padding);
+        @include fallback-rem(height, $fallback--search-form__field--height);
+        @include fallback-rem(line-height, $fallback--search-form__field--height);
         
-        
-        @include fallback-rem(height, $fallback--search-form--search-form__field-height);
-        @include fallback-rem(line-height, $fallback--search-form--search-form__field-height);
-                
+        @include fallback-rem(margin, $fallback--search-form__field--spacing 0 $fallback--search-form__field--spacing $fallback--search-form__field--spacing);
+        @include fallback-rem(padding, $fallback--search-form__field--spacing);
+
         float: left;
 
         -webkit-flex: 1 0 auto;
@@ -92,10 +110,9 @@ $fallback--search-form--search-form__field-height: 20px !default;
     }
 
 
-    /* Old Opera hacks: */
+    ///* Old Opera hacks: */
     @media (min-resolution: .001dpcm) { _:-o-prefocus, .search-form__field {
-        padding: 6px 5px; /* @var */ 
-        padding: 0.6rem .5rem; /* @var */ 
+        @include fallback-rem(padding, ($fallback--search-form__field--spacing * 1.2) $fallback--search-form__field--spacing);
     } }
     
     /* -------------------------------------------------------------------------------------------*/
@@ -105,31 +122,29 @@ $fallback--search-form--search-form__field-height: 20px !default;
     .search-form__submit {
         -webkit-appearance: none;
         border-radius: 0;
-        margin: 0;
-        padding: 0;
-        background: #ddd;
-        border: none;
-        height: 30px; /* @var */ 
-        height: 3rem; /* @var */
+        border: 0;
+        -webkit-border-box: content-box;
+        border-box: content-box;
         
-        margin: 5px 5px 5px 0; /* @var */ 
-        margin: .5rem .5rem .5rem 0; /* @var */ 
-        padding: 5px 10px; /* @var */ 
-        padding: .5rem 1rem; /* @var */ 
+        background: $fallback--search-form__submit--bg-color;
+        
+        @include fallback-rem(height, ($fallback--search-form__field--height + ($fallback--search-form__field--spacing * 2)));
+        @include fallback-rem(line-height, ($fallback--search-form__field--height + ($fallback--search-form__field--spacing * 2)));
+        
+        @include fallback-rem(margin, $fallback--search-form__field--spacing $fallback--search-form__field--spacing $fallback--search-form__field--spacing 0);
+        @include fallback-rem(padding, 0 ($fallback--search-form__field--spacing * 2));
         
         float: left;
         
-            -webkit-flex: 0 1 auto;
-                -ms-flex: 0 1 auto;
-                    flex: 0 1 auto;
+        -webkit-flex: 0 1 auto;
+            -ms-flex: 0 1 auto;
+                flex: 0 1 auto;
     }
-
-
 
     .search-form__submit:hover,
     .search-form__submit:active,
     .search-form__submit:focus {
-        background-color: #ccc; /* @var */
+        background-color: $fallback--search-form__submit--bg-color--alt;
     }
 
     
@@ -140,24 +155,21 @@ $fallback--search-form--search-form__field-height: 20px !default;
     }
     
     
+    .search-form__submit svg {
+        vertical-align: middle;
+    }
+    
+    
     /* PNG Fallback */    
     .no-svg.datauri .search-form__submit:before {
-        content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABTklEQVQ4T6VT21GDQBTNAv9qBaEDSQUij3+pQNMBnUgHagXJPw+3A0kFxg5SAA/P2VlmFtw4ZmQmA7t377nnsREr40mSJMfyEb9Ab7fjOBZ1Xb+Z58xvwUUYhtee570bjcvzbdd191LK07KgAOI4boUQt5j2hWXe933Lfdd1yaRAbY13W1XV5geApv3MZjQGyylkByAOWA/DsG2a5nUmwZieQevephVnHgCws7EQYDCyCRpvbBq1Rz48+uQ3ZCjZ0/N/gEskwKcDZE4RKxIiiqInx3FeUDzCxM0ZEz/ggW81cRHjEQdz+HHgPnQzWsbo26YrBtokRiV5F2wpsFnXJMAzk+XMUcohgwmIjWTA7JGWBPgdo0R9W5alumwzANv0ac+8UAA9ASRDpPLPAARK0zRAM5lccU1TLwJgE6SEePGPt1JMfqN9rqajLwCw/wY2tMxY4fByDwAAAABJRU5ErkJggg==);
-        display: inline-block;
-        position: relative;
-        top: 3px; /* @var */
+        content: url($fallback--search-form__submit--png);
+        vertical-align: middle;
     }
     
     .no-svg.datauri .search-form__submit span {
         display: none;
     }
-    
-    
-    /* IE6 hacks: TEMP - MOVE ELSEWHERE LATER */
-    .search-form__submit {
-        _padding: 0 10px;
-    }
-   
+
 
     /* -------------------------------------------------------------------------------------------*/
     
@@ -192,10 +204,7 @@ $fallback--search-form--search-form__field-height: 20px !default;
             margin-left: -340px; /* @var */
             margin-right: 20px; /* @var */
         }
-        
-        .search-form__field {
-            /*width: 200px; /* @ var */
-        }
+
     }
     
     /* IE9 hacks: */
@@ -211,69 +220,8 @@ $fallback--search-form--search-form__field-height: 20px !default;
             margin-right: 20px; /* @var */
         }
         
-        .search-form__field {
-            /*width: 200px; /* @ var */
-        }
     }
-    
-    /*
-        The following attempt(s) to get the .search-form--right variant working fails in too many
-        places. Problem in FF22 supposed to support flexbox but modernizer report no-flexbox
-        so it breaks (even though it actually works properly natively)
-        Abandoning for now but keep for reference.
-    */
-    
-    /*.datauri.no-flexbox .search-form--right .search-form__submit,
-    .datauri.no-flexbox .search-form--right .search-form__field {
-        float: right;
-    }
-        
-    .datauri.no-flexbox .search-form--right .search-form__field {
-        margin-left: -340px; /* @var *
-        margin-right: 20px; /* @var *
-    }*/
-    
-    /*
-        Force .search-form--right support for IE8 - 9
-        Not ideal so may rethink this...
-    */
-    
-    /*.ie9 .search-form--right .search-form__submit,
-    .ie9 .search-form--right .search-form__field,
-    .ie8 .search-form--right .search-form__submit,
-    .ie8 .search-form--right .search-form__field {
-        float: right;
-    }
-        
-    .ie9 .search-form--right .search-form__field,
-    .ie8 .search-form--right .search-form__field {
-        margin-left: -340px; /* @var *
-        margin-right: 20px; /* @var *
-    }*/
-    
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
 
     /* -- Enhanced layout ----------------------------------------------------------------------- */
@@ -285,7 +233,7 @@ $fallback--search-form--search-form__field-height: 20px !default;
         }
         
         .search-form--right .search-form__field {
-            margin-left: 5px; /* @var */
+            @include fallback-rem(margin-left, $fallback--search-form__field--spacing);
             margin-right: 0;
         }
         
@@ -304,12 +252,13 @@ $fallback--search-form--search-form__field-height: 20px !default;
         .search-form__cancel {
             display: none;
             
-            padding-right: 10px; /* @var */ 
-            padding-right: 1rem; /* @var */ 
-            padding-left: 10px; /* @var */ 
-            padding-left: 1rem; /* @var */ 
-            line-height: 40px;
-            line-height: 4rem;
+            background-color: $fallback--search-form__cancel--bg-color;
+            
+            @include fallback-rem(padding-right, ($fallback--search-form__field--spacing * 2));
+            @include fallback-rem(padding-left, ($fallback--search-form__field--spacing * 2));
+
+            @include fallback-rem(line-height, ($fallback--search-form__field--height + ($fallback--search-form__field--spacing * 4)));
+
              -webkit-order: -1;
             -ms-flex-order: -1;
                      order: -1;
@@ -318,7 +267,7 @@ $fallback--search-form--search-form__field-height: 20px !default;
         .search-form__cancel:hover,
         .search-form__cancel:focus,
         .search-form__cancel:active {
-            background-color: #999; /* @var */
+            background-color: $fallback--search-form__cancel--bg-color--alt;
         }
         
         .search-form__cancel:after {
@@ -349,9 +298,6 @@ $fallback--search-form--search-form__field-height: 20px !default;
         */
         .search-form__field:focus ~ .search-form__cancel {           
             display: block;
-            /*display: -webkit-inline-flex;
-            display: -ms-inline-flexbox;
-            display: inline-flex; */
         }
         
         /*
