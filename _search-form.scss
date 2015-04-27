@@ -1,0 +1,389 @@
+/*------------------------------------------------------------------------------------------------*\
+    Sticky Footer  Pattern
+\*------------------------------------------------------------------------------------------------*/
+
+$fallback--search-form--search-form-bg-color: #bbb !default;
+
+$fallback--search-form--search-form__field-margin: 5px 0 5px 5px !default;
+$fallback--search-form--search-form__field-padding: 5px !default;
+$fallback--search-form--search-form__field-height: 20px !default;
+
+/* -- Basic/fallback layout --------------------------------------------------------------------- */
+
+    /*
+        NOTES:
+        
+        .search-form--right
+        It's not possible to easily re-create this variation so it won't be on the right in 
+        non-flexbox browsers, but that's ok, it's still usable.
+    
+    */
+
+    /* -- .search-form ---------------------------------------------------------------------------*/
+
+    .search-form {
+        background: $fallback--search-form--search-form-bg-color;
+    
+
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        
+        -webkit-flex-wrap: wrap;
+            -ms-flex-wrap: wrap;
+                flex-wrap: wrap;
+    }
+    
+    .search-form:before,
+    .search-form:after {
+        content: " ";
+        display: table;
+    }
+
+    .search-form:after {
+        clear: both;
+    }
+    
+    /* IE7- hacks (can't use MQ else IE8's Respond applies it): */
+    .search-form {
+        *zoom: 1;
+        *padding-bottom: 5px;
+    }
+    
+    /* -------------------------------------------------------------------------------------------*/
+    
+    /* -- .search-form__cancel -------------------------------------------------------------------*/
+    
+    .search-form__cancel {
+        display: none;
+    }
+    
+    /* -------------------------------------------------------------------------------------------*/
+    
+    /* -- .search-form__field --------------------------------------------------------------------*/
+
+    /*
+        1. This to override normalize.
+    */
+    .search-form__field {
+        -webkit-appearance: none !important; /* [1] */
+        -webkit-border-radius: 0px;
+        border-radius: 0px;
+        border: 0;
+        
+        @include fallback-rem(margin, $fallback--search-form--search-form__field-margin);
+        @include fallback-rem(padding, $fallback--search-form--search-form__field-padding);
+        
+        
+        @include fallback-rem(height, $fallback--search-form--search-form__field-height);
+        @include fallback-rem(line-height, $fallback--search-form--search-form__field-height);
+                
+        float: left;
+
+        -webkit-flex: 1 0 auto;
+            -ms-flex: 1 0 auto;
+                flex: 1 0 auto;
+    }
+    
+    .search-form--right .search-form__field {        
+         -webkit-order: 2;
+        -ms-flex-order: 2;
+                 order: 2;
+    }
+
+
+    /* Old Opera hacks: */
+    @media (min-resolution: .001dpcm) { _:-o-prefocus, .search-form__field {
+        padding: 6px 5px; /* @var */ 
+        padding: 0.6rem .5rem; /* @var */ 
+    } }
+    
+    /* -------------------------------------------------------------------------------------------*/
+    
+    /* -- .search-form__submit -------------------------------------------------------------------*/
+
+    .search-form__submit {
+        -webkit-appearance: none;
+        border-radius: 0;
+        margin: 0;
+        padding: 0;
+        background: #ddd;
+        border: none;
+        height: 30px; /* @var */ 
+        height: 3rem; /* @var */
+        
+        margin: 5px 5px 5px 0; /* @var */ 
+        margin: .5rem .5rem .5rem 0; /* @var */ 
+        padding: 5px 10px; /* @var */ 
+        padding: .5rem 1rem; /* @var */ 
+        
+        float: left;
+        
+            -webkit-flex: 0 1 auto;
+                -ms-flex: 0 1 auto;
+                    flex: 0 1 auto;
+    }
+
+
+
+    .search-form__submit:hover,
+    .search-form__submit:active,
+    .search-form__submit:focus {
+        background-color: #ccc; /* @var */
+    }
+
+    
+    .search-form--right .search-form__submit {    
+         -webkit-order: 2;
+        -ms-flex-order: 2;
+                 order: 2;
+    }
+    
+    
+    /* PNG Fallback */    
+    .no-svg.datauri .search-form__submit:before {
+        content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABTklEQVQ4T6VT21GDQBTNAv9qBaEDSQUij3+pQNMBnUgHagXJPw+3A0kFxg5SAA/P2VlmFtw4ZmQmA7t377nnsREr40mSJMfyEb9Ab7fjOBZ1Xb+Z58xvwUUYhtee570bjcvzbdd191LK07KgAOI4boUQt5j2hWXe933Lfdd1yaRAbY13W1XV5geApv3MZjQGyylkByAOWA/DsG2a5nUmwZieQevephVnHgCws7EQYDCyCRpvbBq1Rz48+uQ3ZCjZ0/N/gEskwKcDZE4RKxIiiqInx3FeUDzCxM0ZEz/ggW81cRHjEQdz+HHgPnQzWsbo26YrBtokRiV5F2wpsFnXJMAzk+XMUcohgwmIjWTA7JGWBPgdo0R9W5alumwzANv0ac+8UAA9ASRDpPLPAARK0zRAM5lccU1TLwJgE6SEePGPt1JMfqN9rqajLwCw/wY2tMxY4fByDwAAAABJRU5ErkJggg==);
+        display: inline-block;
+        position: relative;
+        top: 3px; /* @var */
+    }
+    
+    .no-svg.datauri .search-form__submit span {
+        display: none;
+    }
+    
+    
+    /* IE6 hacks: TEMP - MOVE ELSEWHERE LATER */
+    .search-form__submit {
+        _padding: 0 10px;
+    }
+   
+
+    /* -------------------------------------------------------------------------------------------*/
+    
+    /* -- .search-form__adjacent -----------------------------------------------------------------*/
+
+    .search-form__adjacent {          
+        
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        float: left;
+        
+        -webkit-box-flex: 0;
+            -webkit-flex: 0 1 auto;
+                -ms-flex: 0 1 auto;
+                    flex: 0 1 auto;
+    }
+    
+    /* -------------------------------------------------------------------------------------------*/
+    
+    
+        
+    /* IE8 hacks: */
+    @media \0screen {
+        
+        .search-form--right .search-form__submit,
+        .search-form--right .search-form__field {
+            float: right;
+        }
+        
+        .search-form--right .search-form__field {
+            margin-left: -340px; /* @var */
+            margin-right: 20px; /* @var */
+        }
+        
+        .search-form__field {
+            /*width: 200px; /* @ var */
+        }
+    }
+    
+    /* IE9 hacks: */
+    @media all and (min-width:0\0) and (min-resolution: .001dpcm)
+    {
+        .search-form--right .search-form__submit,
+        .search-form--right .search-form__field {
+            float: right;
+        }
+        
+        .search-form--right .search-form__field {
+            margin-left: -340px; /* @var */
+            margin-right: 20px; /* @var */
+        }
+        
+        .search-form__field {
+            /*width: 200px; /* @ var */
+        }
+    }
+    
+    /*
+        The following attempt(s) to get the .search-form--right variant working fails in too many
+        places. Problem in FF22 supposed to support flexbox but modernizer report no-flexbox
+        so it breaks (even though it actually works properly natively)
+        Abandoning for now but keep for reference.
+    */
+    
+    /*.datauri.no-flexbox .search-form--right .search-form__submit,
+    .datauri.no-flexbox .search-form--right .search-form__field {
+        float: right;
+    }
+        
+    .datauri.no-flexbox .search-form--right .search-form__field {
+        margin-left: -340px; /* @var *
+        margin-right: 20px; /* @var *
+    }*/
+    
+    /*
+        Force .search-form--right support for IE8 - 9
+        Not ideal so may rethink this...
+    */
+    
+    /*.ie9 .search-form--right .search-form__submit,
+    .ie9 .search-form--right .search-form__field,
+    .ie8 .search-form--right .search-form__submit,
+    .ie8 .search-form--right .search-form__field {
+        float: right;
+    }
+        
+    .ie9 .search-form--right .search-form__field,
+    .ie8 .search-form--right .search-form__field {
+        margin-left: -340px; /* @var *
+        margin-right: 20px; /* @var *
+    }*/
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    /* -- Enhanced layout ----------------------------------------------------------------------- */
+    @media only screen and (max-width: 719px) {
+        
+        .search-form--right .search-form__submit,
+        .search-form--right .search-form__field {
+            float: left;
+        }
+        
+        .search-form--right .search-form__field {
+            margin-left: 5px; /* @var */
+            margin-right: 0;
+        }
+        
+        .search-form__adjacent {
+            width: 100%;
+        }
+        
+        
+        .no-flexbox .search-form {
+            display: block;
+        }
+    }
+    
+    @media only screen and (min-width: 720px) {
+
+        .search-form__cancel {
+            display: none;
+            
+            padding-right: 10px; /* @var */ 
+            padding-right: 1rem; /* @var */ 
+            padding-left: 10px; /* @var */ 
+            padding-left: 1rem; /* @var */ 
+            line-height: 40px;
+            line-height: 4rem;
+             -webkit-order: -1;
+            -ms-flex-order: -1;
+                     order: -1;
+        }
+        
+        .search-form__cancel:hover,
+        .search-form__cancel:focus,
+        .search-form__cancel:active {
+            background-color: #999; /* @var */
+        }
+        
+        .search-form__cancel:after {
+            content: url(data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIj48cGF0aCAgZmlsbD0iIzQ0NDQ0NCIgZD0iTTE1LjgzMyA1LjM0NmwtMS4xNzktMS4xNzktNC42NTQgNC42NTQtNC42NTQtNC42NTQtMS4xNzkgMS4xNzkgNC42NTQgNC42NTQtNC42NTQgNC42NTQgMS4xNzkgMS4xNzkgNC42NTQtNC42NTQgNC42NTQgNC42NTQgMS4xNzktMS4xNzktNC42NTQtNC42NTR6Ij48L3BhdGg+PC9zdmc+);
+            
+            display: -webkit-inline-flex;
+            display: -ms-inline-flexbox;
+            display: inline-flex;
+            
+            line-height: 0;
+            vertical-align: middle;
+        }
+
+        .search-form__field {
+            width: auto;
+        }
+        
+        /*
+            Expander
+        */        
+        .search-form__field:focus ~ .search-form__adjacent {
+            display: none;
+        }
+        
+        /*
+            Cancel button
+            Note: only necessary on some touch devices where it can be difficult to un-focus.
+        */
+        .search-form__field:focus ~ .search-form__cancel {           
+            display: block;
+            /*display: -webkit-inline-flex;
+            display: -ms-inline-flexbox;
+            display: inline-flex; */
+        }
+        
+        /*
+            Expander issue:
+            Issue: adjacent block is hidden but search field doesn't expand so it looks weird.
+            Affects: browsers that DON'T support flexbox, but DO support ~ :focus selector.
+                IE9
+                FF3.5 - 21 
+                Safari6
+           
+            
+        
+            --Modernizr adds the .flexbox class. If JS unavailable, expanding doesn't work.
+            That's ok, but I may as well just have used JS to make the expanding working the first
+            place!!!!??? :-(--
+            
+            If no-flexbox, undo Expander and Cancel.
+            Note, without JS the issue described above will still occur, but it's still usable.
+
+        */
+        .no-flexbox .search-form__field:focus ~ .search-form__adjacent {
+            display: block;
+        }
+        
+        .no-flexbox .search-form__field:focus ~ .search-form__cancel {
+            display: none;
+        }
+        
+        
+        .search-form__adjacent {          
+            width: auto;
+        }
+    }
+
+/* ---------------------------------------------------------------------------------------------- */
