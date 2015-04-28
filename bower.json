@@ -1,17 +1,19 @@
 {
-    "name": "fallback-svg",
-    "version": "0.1.1",
-    "homepage": "https://github.com/Fall-Back/SVG",
+    "name": "Fallback-Search-Form",
+    "version": "0.1.0",
+    "homepage": "https://github.com/Fall-Back/Search-Form",
     "authors": [
         "Andy Kirk <andy.kirk@gridlight-design.co.uk>"
     ],
-    "description": "A pattern to include SVG's in the best possible way without penalising any particular user group.",
-    "main": "_svg.scss",
+    "description": "A simple pattern for an expaning search form.",
+    "main": "_search-form.scss",
     "keywords": [
         "fallback",
-        "fallbacks",
         "css",
-        "svg"
+        "search"
     ],
-    "license": "Apache"
+    "license": "Apache",
+    "dependencies": {
+        "Fallback-Base": "~0.1.0"
+    }
 }
