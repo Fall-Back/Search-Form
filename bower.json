@@ -14,6 +14,6 @@
     ],
     "license": "Apache",
     "dependencies": {
-        "fallback-base": "https://github.com/Fall-Back/Fallback-Base.git"
+        "Fallback-Base": "https://github.com/Fall-Back/Fallback-Base.git"
     }
 }
