@@ -42,6 +42,7 @@ $fallback--search-form__submit--png:           "data:image/png;base64,iVBORw0KGg
         .search-form--right
         It's not possible to easily re-create this variation so it won't be on the right in 
         non-flexbox browsers, but that's ok, it's still usable.
+        IE 8 and 9 are forced into submission for this.
     
     */
 
@@ -118,11 +119,18 @@ $fallback--search-form__submit--png:           "data:image/png;base64,iVBORw0KGg
                  order: 2;
     }
 
+    /*
+        Opera Mini Hacks
+        Opea mini 7- ignores line height.
+        Opera Mini 8 seems to enforce a minimum font size for the search field which forces it to be
+        higher than it should be.
+        min-height and no padding seems to fix it.
+    */
+    .opera-mini .search-form__field {
+        padding: 0;
+        @include fallback-rem(min-height, ($fallback--search-form__field--height + ($fallback--search-form__field--spacing * 2)));
+    }
 
-    ///* Old Opera hacks: */
-    @media (min-resolution: .001dpcm) { _:-o-prefocus, .search-form__field {
-        @include fallback-rem(padding, ($fallback--search-form__field--spacing * 1.2) $fallback--search-form__field--spacing);
-    } }
     
     /* -------------------------------------------------------------------------------------------*/
     
@@ -138,7 +146,8 @@ $fallback--search-form__submit--png:           "data:image/png;base64,iVBORw0KGg
         background: $fallback--search-form__submit--bg-color;
         
         @include fallback-rem(height, ($fallback--search-form__field--height + ($fallback--search-form__field--spacing * 2)));
-        @include fallback-rem(line-height, ($fallback--search-form__field--height + ($fallback--search-form__field--spacing * 2)));
+        //@include fallback-rem(line-height, ($fallback--search-form__field--height + ($fallback--search-form__field--spacing * 2)));
+        line-height: 0;
         
         @include fallback-rem(margin, $fallback--search-form__field--spacing $fallback--search-form__field--spacing $fallback--search-form__field--spacing 0);
         @include fallback-rem(padding, 0 ($fallback--search-form__field--spacing * 2));
@@ -165,14 +174,16 @@ $fallback--search-form__submit--png:           "data:image/png;base64,iVBORw0KGg
     
     
     .search-form__submit svg {
-        vertical-align: middle;
+        //vertical-align: middle;
+        @include fallback-rem(height, $fallback--search-form__field--height);
+        @include fallback-rem(width, $fallback--search-form__field--height);
     }
     
     
     /* PNG Fallback */    
     .no-svg.datauri .search-form__submit:before {
         content: url($fallback--search-form__submit--png);
-        vertical-align: middle;
+        //vertical-align: middle;
     }
     
     .no-svg.datauri .search-form__submit span {
