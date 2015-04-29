@@ -7,6 +7,7 @@
     ],
     "description": "A simple pattern for an expanding search form.",
     "main": "_search-form.scss",
+    "ignore":[],
     "keywords": [
         "fallback",
         "css",
