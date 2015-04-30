@@ -283,6 +283,10 @@ $fallback--search-form__submit--png:           "data:image/png;base64,iVBORw0KGg
 
             @include fallback-rem(line-height, ($fallback--search-form__field--height + ($fallback--search-form__field--spacing * 4)));
 
+            -webkit-flex: 0 0 auto;
+                -ms-flex: 0 0 auto;
+                    flex: 0 0 auto;
+                    
              -webkit-order: -1;
             -ms-flex-order: -1;
                      order: -1;
@@ -354,6 +358,20 @@ $fallback--search-form__submit--png:           "data:image/png;base64,iVBORw0KGg
         .search-form__collapse {          
             width: auto;
         }
+    }
+    
+    /*
+        Fixes for old webkit browsers - those supporting the -webkit-box-flex syntax.
+    */
+    .flexboxlegacy .search-form__submit,
+    .flexboxlegacy .search-form__field,
+    .flexboxlegacy .search-form__collapse {
+        float: none;
+    }
+    
+    .flexboxlegacy .search-form__cancel:after {
+        display: table-cell;
+        @include fallback-rem(height, ($fallback--search-form__field--height * 2));
     }
 
 /* ---------------------------------------------------------------------------------------------- */
