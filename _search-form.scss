@@ -135,7 +135,10 @@ $fallback--search-form__submit--png:           "data:image/png;base64,iVBORw0KGg
     /* -------------------------------------------------------------------------------------------*/
     
     /* -- .search-form__submit -------------------------------------------------------------------*/
-
+    
+    /*
+        1. IE 6/7 needs this.
+    */
     .search-form__submit {
         -webkit-appearance: none;
         border-radius: 0;
@@ -147,7 +150,8 @@ $fallback--search-form__submit--png:           "data:image/png;base64,iVBORw0KGg
         
         @include fallback-rem(height, ($fallback--search-form__field--height + ($fallback--search-form__field--spacing * 2)));
         //@include fallback-rem(line-height, ($fallback--search-form__field--height + ($fallback--search-form__field--spacing * 2)));
-        line-height: 0;
+        line-height: 0; /* [1] */
+        *line-height: 1.5;
         
         @include fallback-rem(margin, $fallback--search-form__field--spacing $fallback--search-form__field--spacing $fallback--search-form__field--spacing 0);
         @include fallback-rem(padding, 0 ($fallback--search-form__field--spacing * 2));
@@ -181,12 +185,12 @@ $fallback--search-form__submit--png:           "data:image/png;base64,iVBORw0KGg
     
     
     /* PNG Fallback */    
-    .no-svg.datauri .search-form__submit:before {
+    .no-inlinesvg.datauri .search-form__submit:before {
         content: url($fallback--search-form__submit--png);
         //vertical-align: middle;
     }
     
-    .no-svg.datauri .search-form__submit span {
+    .no-inlinesvg.datauri .search-form__submit span {
         display: none;
     }
 
