@@ -15,8 +15,8 @@ $fallback--search-form__cancel--bg-color--alt: #999 !default;
 
 // Sizes:
 
-$fallback--search-form__field--height:         20px !default;
-$fallback--search-form__field--spacing:        5px !default;
+$fallback--search-form--height:                20px !default;
+$fallback--search-form--spacing:               5px !default;
 
 
 // Breakpoints:
@@ -100,11 +100,11 @@ $fallback--search-form__submit--png:           "data:image/png;base64,iVBORw0KGg
         -webkit-border-box: content-box;
         border-box: content-box;
         
-        @include fallback-rem(height, $fallback--search-form__field--height);
-        @include fallback-rem(line-height, $fallback--search-form__field--height);
+        @include fallback-rem(height, $fallback--search-form--height);
+        @include fallback-rem(line-height, $fallback--search-form--height);
         
-        @include fallback-rem(margin, $fallback--search-form__field--spacing 0 $fallback--search-form__field--spacing $fallback--search-form__field--spacing);
-        @include fallback-rem(padding, $fallback--search-form__field--spacing);
+        @include fallback-rem(margin, $fallback--search-form--spacing 0 $fallback--search-form--spacing $fallback--search-form--spacing);
+        @include fallback-rem(padding, $fallback--search-form--spacing);
 
         float: left;
 
@@ -128,7 +128,7 @@ $fallback--search-form__submit--png:           "data:image/png;base64,iVBORw0KGg
     */
     _:-o-prefocus, body:last-child .search-form__field {
         padding: 0;
-        @include fallback-rem(min-height, ($fallback--search-form__field--height + ($fallback--search-form__field--spacing * 2)));
+        @include fallback-rem(min-height, ($fallback--search-form--height + ($fallback--search-form--spacing * 2)));
     }
 
     
@@ -148,13 +148,13 @@ $fallback--search-form__submit--png:           "data:image/png;base64,iVBORw0KGg
         
         background: $fallback--search-form__submit--bg-color;
         
-        @include fallback-rem(height, ($fallback--search-form__field--height + ($fallback--search-form__field--spacing * 2)));
-        //@include fallback-rem(line-height, ($fallback--search-form__field--height + ($fallback--search-form__field--spacing * 2)));
+        @include fallback-rem(height, ($fallback--search-form--height + ($fallback--search-form--spacing * 2)));
+        //@include fallback-rem(line-height, ($fallback--search-form--height + ($fallback--search-form--spacing * 2)));
         line-height: 0; /* [1] */
         *line-height: 1.5;
         
-        @include fallback-rem(margin, $fallback--search-form__field--spacing $fallback--search-form__field--spacing $fallback--search-form__field--spacing 0);
-        @include fallback-rem(padding, 0 ($fallback--search-form__field--spacing * 2));
+        @include fallback-rem(margin, $fallback--search-form--spacing $fallback--search-form--spacing $fallback--search-form--spacing 0);
+        @include fallback-rem(padding, 0 ($fallback--search-form--spacing * 2));
         
         float: left;
         
@@ -179,8 +179,8 @@ $fallback--search-form__submit--png:           "data:image/png;base64,iVBORw0KGg
     
     .search-form__submit svg {
         //vertical-align: middle;
-        @include fallback-rem(height, $fallback--search-form__field--height);
-        @include fallback-rem(width, $fallback--search-form__field--height);
+        @include fallback-rem(height, $fallback--search-form--height);
+        @include fallback-rem(width, $fallback--search-form--height);
     }
     
     
@@ -257,7 +257,7 @@ $fallback--search-form__submit--png:           "data:image/png;base64,iVBORw0KGg
         }
         
         .search-form--right .search-form__field {
-            @include fallback-rem(margin-left, $fallback--search-form__field--spacing);
+            @include fallback-rem(margin-left, $fallback--search-form--spacing);
             margin-right: 0;
         }
         
@@ -278,10 +278,10 @@ $fallback--search-form__submit--png:           "data:image/png;base64,iVBORw0KGg
             
             background-color: $fallback--search-form__cancel--bg-color;
             
-            @include fallback-rem(padding-right, ($fallback--search-form__field--spacing * 2));
-            @include fallback-rem(padding-left, ($fallback--search-form__field--spacing * 2));
+            @include fallback-rem(padding-right, ($fallback--search-form--spacing * 2));
+            @include fallback-rem(padding-left, ($fallback--search-form--spacing * 2));
 
-            @include fallback-rem(line-height, ($fallback--search-form__field--height + ($fallback--search-form__field--spacing * 4)));
+            @include fallback-rem(line-height, ($fallback--search-form--height + ($fallback--search-form--spacing * 4)));
 
             -webkit-flex: 0 0 auto;
                 -ms-flex: 0 0 auto;
