@@ -2,3 +2,4 @@
 bower_components/
 search-form.css
 search-form.scss
+*.css.map
