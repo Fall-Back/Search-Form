@@ -272,6 +272,38 @@ $fallback--search-form__submit--png:           "data:image/png;base64,iVBORw0KGg
     }
     
     @media only screen and (min-width: $fallback--search-form--breakpoint--enhanced) {
+    
+        /*
+            Older FF flexbox doesn't support flex wrap so basic layout breaks. Adding old -moz 
+            flexbox for the enhanced width old solves this problem.
+        */
+        .search-form {
+            display: -moz-box;
+            width: 100%;
+        }
+        
+        .search-form__field {
+            -moz-box-flex: 1;
+        }
+        
+        .search-form__submit {
+            -moz-box-flex: 0;
+        }
+        
+        .search-form__collapse {
+            -moz-box-flex: 1;
+        }
+        
+        .search-form__cancel {
+            -moz-box-flex: 0;
+            -moz-box-ordinal-group: 0;
+        }
+        
+        .search-form--right .search-form__field,
+        .search-form--right .search-form__submit {
+            -moz-box-ordinal-group: 2;
+        }
+    
 
         .search-form__cancel {
             display: none;
@@ -333,7 +365,7 @@ $fallback--search-form__submit--png:           "data:image/png;base64,iVBORw0KGg
             Issue: adjacent block is hidden but search field doesn't expand so it looks weird.
             Affects: browsers that DON'T support flexbox, but DO support ~ :focus selector.
                 IE9
-                FF3.5 - 21 (note - look into using the -moz prefix for flexbox in this case)
+                FF3.5 - 21 (note - look into using the -moz prefix for flexbox in this case for 8+)
                 Safari6 (CSS cut won't load CSS for this browser so shouldn't be an issue any more)
            
             
