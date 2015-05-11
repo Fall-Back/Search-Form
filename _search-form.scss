@@ -365,9 +365,9 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
         
         /*
             Expander issue:
-            Issue: adjacent block is hidden but search field doesn't expand so it looks weird.
-            Affects: browsers that DON'T support flexbox, but DO support ~ :focus selector.
-                IE9
+            Collapse block is hidden but search field doesn't expand so it looks weird.
+            Affects: browsers that DON'T support flexbox, but DO support :focus ~ selector.
+                IE9 - had to use hack - see below.
                 FF3.5 - 21 (note - look into using the -moz prefix for flexbox in this case for 8+)
                 Safari6 (CSS cut won't load CSS for this browser so shouldn't be an issue any more)
            
@@ -398,7 +398,7 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
     
     /* IE9 hacks: */
     /*
-        Expander issue: Adjacent block is hidden but search field doesn't expand so it looks weird.
+        Expander issue: Collapse block is hidden but search field doesn't expand so it looks weird.
     */
     @media #{$fallback--ie9--hack} {
         .search-form__field:focus ~ .search-form__collapse {
