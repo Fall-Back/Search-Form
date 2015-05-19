@@ -316,7 +316,9 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
             @include fallback-rem(padding-right, ($fallback--search-form--spacing * 2));
             @include fallback-rem(padding-left, ($fallback--search-form--spacing * 2));
 
+            @include fallback-rem(height, ($fallback--search-form--height + ($fallback--search-form--spacing * 4)));
             @include fallback-rem(line-height, ($fallback--search-form--height + ($fallback--search-form--spacing * 4)));
+            @include fallback-rem(width, ($fallback--search-form--height + ($fallback--search-form--spacing * 4)));
 
             -webkit-flex: 0 0 auto;
                 -ms-flex: 0 0 auto;
@@ -336,12 +338,16 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
         .search-form__cancel:after {
             content: url($fallback--search-form__cancel--svg);
             
-            display: -webkit-inline-flex;
-            display: -ms-inline-flexbox;
-            display: inline-flex;
-            
-            line-height: 0;
+            display: inline-block;
             vertical-align: middle;
+            /* IE10-11 flexbox chokes without width: */
+            width:  20px;
+            width:  2rem;
+            /* IE11 flexbox stretches icon without height: */
+            height:  20px;
+            height:  2rem;
+            /* But now blink pushes the icon to the bottom without line-height: 0. */
+            line-height: 0;
         }
 
         .search-form__field {
