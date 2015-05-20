@@ -51,6 +51,9 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
 
     /* -- .search-form ---------------------------------------------------------------------------*/
 
+    /*
+        1. Prevent extra bottom space when form is inside a container.
+    */
     .search-form {
         background: $fallback--search-form--bg-color;
     
@@ -62,6 +65,8 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
         -webkit-flex-wrap: wrap;
             -ms-flex-wrap: wrap;
                 flex-wrap: wrap;
+                
+        vertical-align: top;
     }
     
         .search-form:before,
