@@ -105,8 +105,8 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
         -webkit-border-radius: 0px;
         border-radius: 0px;
         border: 0;
-        -webkit-border-box: content-box;
-        border-box: content-box;
+        -webkit-box-sizing: content-box;
+        box-sizing: content-box;
         
         @include fallback-rem(height, $fallback--search-form--height);
         @include fallback-rem(line-height, $fallback--search-form--height);
