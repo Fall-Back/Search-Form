@@ -4,13 +4,28 @@
 
 // Colours:
 
-$fallback--search-form--bg-color:              #bbb !default;
-$fallback--search-form__field--bg-color:       #eee !default;
-$fallback--search-form__field--bg-color-alt:   #ddd !default;
-$fallback--search-form__submit--bg-color:      #ddd !default;
-$fallback--search-form__submit--bg-color--alt: #ccc !default;
-$fallback--search-form__cancel--bg-color:      #bbb !default;
-$fallback--search-form__cancel--bg-color--alt: #999 !default;
+// Slightly hacky way of allowing the main UI colour of this pattern to be:
+// - base-ui colour (if set)
+// - otherwise #999 
+// - but can be specifically overridden
+$t: false;
+@if variable-exists(fallback--base-ui-color) {
+    $t: $fallback--base-ui-color;
+} @else {
+    $t: #999;
+}
+$fallback--search-form--ui-color:              $t !default;
+
+$fallback--search-form--bg-color:              $fallback--search-form--ui-color !default;//lighten($fallback--search-form--ui-color, 60%) !default;
+
+$fallback--search-form__field--bg-color:       #fff !default;
+$fallback--search-form__field--bg-color--alt:  #ffffdc !default;
+
+$fallback--search-form__submit--bg-color:      lighten($fallback--search-form--ui-color, 30%) !default;// lighten($fallback--search-form--ui-color, 70%) !default;
+$fallback--search-form__submit--bg-color--alt: darken($fallback--search-form__submit--bg-color, 10%) !default;
+
+$fallback--search-form__cancel--bg-color:      lighten($fallback--search-form--ui-color, 20%) !default;
+$fallback--search-form__cancel--bg-color--alt: darken($fallback--search-form__cancel--bg-color, 10%) !default;
 
 
 // Sizes:
@@ -108,6 +123,8 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
         -webkit-box-sizing: content-box;
         box-sizing: content-box;
         
+        background-color: $fallback--search-form__field--bg-color;
+        
         @include fallback-rem(height, $fallback--search-form--height);
         @include fallback-rem(line-height, $fallback--search-form--height);
         
@@ -119,6 +136,10 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
         -webkit-flex: 1 0 auto;
             -ms-flex: 1 0 auto;
                 flex: 1 0 auto;
+    }
+    
+    .search-form__field:focus {
+        background-color: $fallback--search-form__field--bg-color--alt;
     }
     
     .search-form--right .search-form__field {        
@@ -172,7 +193,6 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
     }
 
     .search-form__submit:hover,
-    .search-form__submit:active,
     .search-form__submit:focus {
         background-color: $fallback--search-form__submit--bg-color--alt;
     }
