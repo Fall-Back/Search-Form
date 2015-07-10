@@ -367,10 +367,8 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
             vertical-align: middle;
             /* IE10-11 flexbox chokes without width: */
             width:  20px;
-            width:  2rem;
             /* IE11 flexbox stretches icon without height: */
             height:  20px;
-            height:  2rem;
             /* But now blink pushes the icon to the bottom without line-height: 0. */
             line-height: 0;
         }
