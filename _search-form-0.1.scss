@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------------------------*\
-    Fall-Back Search Form Pattern v0.5
+    Fall-Back Search Form Pattern v0.1
 \*------------------------------------------------------------------------------------------------*/
 
 // Colours:
@@ -30,10 +30,8 @@ $fallback--search-form__cancel--bg-color--alt: darken($fallback--search-form__ca
 
 // Sizes:
 
-$fallback--search-form--font-size:            $fallback--base-font-size !default;    
-$fallback--search-form--height:               ($fallback--base-em-ratio * 2em) !default;
-$fallback--search-form--field-height:         ($fallback--search-form--height * 0.75) !default;
-$fallback--search-form--spacing:              ($fallback--search-form--height / 8) !default;
+$fallback--search-form--height:                20px !default;
+$fallback--search-form--spacing:               5px !default;
 
 
 // Breakpoints:
@@ -43,7 +41,7 @@ $fallback--search-form--breakpoint--enhanced:  720px !default;
 
 // SVG's
 
-$fallback--search-form__cancel--svg:           "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMCAyMCI+PHBhdGggZmlsbD0iIzQ0NCIgZD0iTTIwIDIuMDJMMTcuOTggMCAxMCA3Ljk4IDIuMDIgMCAwIDIuMDIgNy45OCAxMCAwIDE3Ljk4IDIuMDIgMjAgMTAgMTIuMDIgMTcuOTggMjAgMjAgMTcuOTggMTIuMDIgMTAgMjAgMi4wMnoiLz48L3N2Zz4=" !default;
+$fallback--search-form__cancel--svg:           "data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIj48cGF0aCAgZmlsbD0iIzQ0NDQ0NCIgZD0iTTE1LjgzMyA1LjM0NmwtMS4xNzktMS4xNzktNC42NTQgNC42NTQtNC42NTQtNC42NTQtMS4xNzkgMS4xNzkgNC42NTQgNC42NTQtNC42NTQgNC42NTQgMS4xNzkgMS4xNzkgNC42NTQtNC42NTQgNC42NTQgNC42NTQgMS4xNzktMS4xNzktNC42NTQtNC42NTR6Ij48L3BhdGg+PC9zdmc+" !default;
 
 
 // Fall-Back PNG's:
@@ -126,10 +124,12 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
         box-sizing: content-box;
         
         background-color: $fallback--search-form__field--bg-color;
-        height: $fallback--search-form--field-height;
-        line-height: $fallback--search-form--field-height;
-        margin: $fallback--search-form--spacing 0 $fallback--search-form--spacing $fallback--search-form--spacing;
-        padding: $fallback--search-form--spacing;
+        
+        @include fallback-rem(height, $fallback--search-form--height);
+        @include fallback-rem(line-height, $fallback--search-form--height);
+        
+        @include fallback-rem(margin, $fallback--search-form--spacing 0 $fallback--search-form--spacing $fallback--search-form--spacing);
+        @include fallback-rem(padding, $fallback--search-form--spacing);
 
         float: left;
 
@@ -157,8 +157,7 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
     */
     _:-o-prefocus, body:last-child .search-form__field {
         padding: 0;
-        min-height: $fallback--search-form--height;
-        ////@include fallback-rem(min-height, ($fallback--search-form--height + ($fallback--search-form--spacing * 2)));
+        @include fallback-rem(min-height, ($fallback--search-form--height + ($fallback--search-form--spacing * 2)));
     }
 
     
@@ -178,12 +177,13 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
         
         background: $fallback--search-form__submit--bg-color;
         
-        height: $fallback--search-form--field-height;
-        line-height: 0;
-        *line-height: 1.5; /* [1] */
+        @include fallback-rem(height, ($fallback--search-form--height + ($fallback--search-form--spacing * 2)));
+        //@include fallback-rem(line-height, ($fallback--search-form--height + ($fallback--search-form--spacing * 2)));
+        line-height: 0; /* [1] */
+        *line-height: 1.5;
         
-        margin: $fallback--search-form--spacing $fallback--search-form--spacing $fallback--search-form--spacing 0;
-        padding:  0 ($fallback--search-form--spacing * 2);
+        @include fallback-rem(margin, $fallback--search-form--spacing $fallback--search-form--spacing $fallback--search-form--spacing 0);
+        @include fallback-rem(padding, 0 ($fallback--search-form--spacing * 2));
         
         float: left;
         
@@ -206,8 +206,9 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
     
     
     .search-form__submit svg {
-        height: $fallback--search-form--height / 2;
-        width: $fallback--search-form--height / 2;
+        //vertical-align: middle;
+        @include fallback-rem(height, $fallback--search-form--height);
+        @include fallback-rem(width, $fallback--search-form--height);
     }
     
     
@@ -284,7 +285,7 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
         }
         
         .search-form--right .search-form__field {
-            margin-left: $fallback--search-form--spacing;
+            @include fallback-rem(margin-left, $fallback--search-form--spacing);
             margin-right: 0;
         }
         
@@ -336,11 +337,13 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
             display: none;
             
             background-color: $fallback--search-form__cancel--bg-color;
-            padding-right: $fallback--search-form--spacing * 2;
-            padding-left: $fallback--search-form--spacing * 2;
+            
+            @include fallback-rem(padding-right, ($fallback--search-form--spacing * 2));
+            @include fallback-rem(padding-left, ($fallback--search-form--spacing * 2));
 
-            height: $fallback--search-form--height;
-            line-height: $fallback--search-form--height;
+            @include fallback-rem(height, ($fallback--search-form--height + ($fallback--search-form--spacing * 4)));
+            @include fallback-rem(line-height, ($fallback--search-form--height + ($fallback--search-form--spacing * 4)));
+            @include fallback-rem(width, ($fallback--search-form--height + ($fallback--search-form--spacing * 4)));
 
             -webkit-flex: 0 0 auto;
                 -ms-flex: 0 0 auto;
@@ -358,15 +361,14 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
         }
         
         .search-form__cancel:after {
-            content: url($fallback--search-form__cancel--svg);         
+            content: url($fallback--search-form__cancel--svg);
+            
             display: inline-block;
             vertical-align: middle;
-            width: $fallback--search-form--spacing * 2;
-            
             /* IE10-11 flexbox chokes without width: */
-            /*width:  20px;*/
+            width:  20px;
             /* IE11 flexbox stretches icon without height: */
-            /*height:  20px;*/
+            height:  20px;
             /* But now blink pushes the icon to the bottom without line-height: 0. */
             line-height: 0;
         }
