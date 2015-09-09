@@ -117,6 +117,12 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
 
     /*
         1. This to override normalize.
+        
+        @TODO - box-sizing got a little jumbled somewhere.
+        Either I need to stick with content-box and adjust to the height to take into account
+        the padding, or I need to enforce border-box. The problem wwith this is that the class isn't
+        of a high-enough specifiity to override Normalise's setting of content-box.
+        Oddly, FF doesn't seem to make a difference - only Chrome.
     */
     .search-form__field {
         -webkit-appearance: none !important; /* [1] */
