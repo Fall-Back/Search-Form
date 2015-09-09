@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*------------------------------------------------------------------------------------------------*\
     Fall-Back Search Form Pattern v0.5
 \*------------------------------------------------------------------------------------------------*/
@@ -136,6 +137,10 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
         -webkit-flex: 1 0 auto;
             -ms-flex: 1 0 auto;
                 flex: 1 0 auto;
+                
+        /* IE7- hacks (box-model height correction): */
+        *height: $fallback--search-form--height / 2;
+        *line-height: $fallback--search-form--height / 2;
     }
     
     .search-form__field:focus {
@@ -423,6 +428,17 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
     }
     
     
+    /* IE8 hacks: */
+    /*
+        Respond:
+        Expander issue: Collapse block is hidden but search field doesn't expand so it looks weird.
+    */
+    @media \0screen {
+       .search-form__field:focus ~ .search-form__collapse {
+            display: block;
+        }
+    }
+    
     /* IE9 hacks: */
     /*
         Expander issue: Collapse block is hidden but search field doesn't expand so it looks weird.
@@ -435,7 +451,6 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
         .search-form__field:focus ~ .search-form__cancel {
             display: none;
         }
-        
     }
     
     
