@@ -313,7 +313,7 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
     
         /*
             Older FF flexbox doesn't support flex wrap so basic layout breaks. Adding old -moz 
-            flexbox for the enhanced width old solves this problem.
+            flexbox for the enhanced width ONLY solves this problem.
         */
         .search-form {
             display: -moz-box;
