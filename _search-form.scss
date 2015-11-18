@@ -41,7 +41,7 @@ $fallback--search-form--field-height:          $fallback--base-em-ratio * 1em !d
 $fallback--search-form--spacing:               $fallback--search-form--field-height / 8 !default;
 $fallback--search-form--height:                $fallback--search-form--field-height + ($fallback--search-form--spacing * 2) !default;
 
-$fallback--search-form__cancel--size:        1em !default;
+$fallback--search-form__cancel--size:          1em !default;
 //$fallback--search-form--height:               $fallback--base-line-height * 1.5em;//1.71428571429em; //($fallback--base-em-ratio * 2em) !default; // 3.42857142858
 
 //$fallback--search-form--spacing:              ($fallback--search-form--height / 8) !default;
@@ -92,6 +92,8 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
         display: -webkit-flex;
         display: -ms-flexbox;
         display: flex;
+        
+        margin: 0;
         
         //width: 100%;
 
