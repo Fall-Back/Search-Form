@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /*------------------------------------------------------------------------------------------------*\
     Fall-Back Search Form Pattern v0.5
-    
+
     Design for use with the basic [CSS Mustard Cut](https://github.com/Fall-Back/CSS-Mustard-Cut)
     IE 9+, FF 8+, Opera 12, [Chrome 29+, Android ~4.4+]
     Chrome 29+, Opera 16+, Safari 6.1+, iOS 7+, Android ~4.4+
@@ -12,7 +12,7 @@
 
 // Slightly hacky way of allowing the main UI colour of this pattern to be:
 // - base-ui colour (if set)
-// - otherwise #999 
+// - otherwise #999
 // - but can be specifically overridden
 $t: false;
 @if variable-exists(fallback--base-ui-color) {
@@ -36,10 +36,15 @@ $fallback--search-form__cancel--bg-color--alt: darken($fallback--search-form__ca
 
 // Sizes:
 
-$fallback--search-form--font-size:            $fallback--base-font-size !default;    
-$fallback--search-form--height:               ($fallback--base-em-ratio * 2em) !default;
-$fallback--search-form--field-height:         ($fallback--search-form--height * 0.75) !default;
-$fallback--search-form--spacing:              ($fallback--search-form--height / 8) !default;
+$fallback--search-form--font-size:             $fallback--base-font-size !default;
+$fallback--search-form--field-height:          $fallback--base-em-ratio * 1em !default;
+$fallback--search-form--spacing:               $fallback--search-form--field-height / 8 !default;
+$fallback--search-form--height:                $fallback--search-form--field-height + ($fallback--search-form--spacing * 2) !default;
+
+$fallback--search-form__cancel--size:        1em !default;
+//$fallback--search-form--height:               $fallback--base-line-height * 1.5em;//1.71428571429em; //($fallback--base-em-ratio * 2em) !default; // 3.42857142858
+
+//$fallback--search-form--spacing:              ($fallback--search-form--height / 8) !default;
 
 
 // Breakpoints:
@@ -64,12 +69,15 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
 
     /*
         NOTES:
-        
+
         .search-form--right
-        It's not possible to easily re-create this variation so it won't be on the right in 
+        It's not possible to easily re-create this variation so it won't be on the right in
         non-flexbox browsers, but that's ok, it's still usable.
         IE 8 and 9 are forced into submission for this.
-    
+
+        Nesting is to increase specificity.
+        This helps to override things link Normalize and Cleanse.
+
     */
 
     /* -- .search-form ---------------------------------------------------------------------------*/
@@ -79,202 +87,214 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
     */
     .search-form {
         background: $fallback--search-form--bg-color;
-    
 
+        //display: -moz-box;
         display: -webkit-flex;
         display: -ms-flexbox;
         display: flex;
         
+        //width: 100%;
+
         -webkit-flex-wrap: wrap;
             -ms-flex-wrap: wrap;
                 flex-wrap: wrap;
-                
+
         vertical-align: top;
     }
-    
-        .search-form:before,
-        .search-form:after {
-            content: " ";
-            display: table;
-        }
 
-        .search-form:after {
-            clear: both;
-        }
-    
+
+    .search-form:before,
+    .search-form:after {
+        content: " ";
+        display: table;
+    }
+
+    .search-form:after {
+        clear: both;
+    }
+
     ///* IE7- hacks (can't use MQ else IE8's Respond applies it): */
     //.search-form {
     //    *zoom: 1;
     //    *padding-bottom: 5px;
     //}
-    
-    /* -------------------------------------------------------------------------------------------*/
-    
-    /* -- .search-form__cancel -------------------------------------------------------------------*/
-    
-    .search-form__cancel {
-        display: none;
-    }
-    
-    /* -------------------------------------------------------------------------------------------*/
-    
-    /* -- .search-form__field --------------------------------------------------------------------*/
 
-    /*
-        1. This to override normalize.
+        /* -------------------------------------------------------------------------------------------*/
+
+        /* -- .search-form__cancel -------------------------------------------------------------------*/
+
+        .search-form .search-form__cancel {
+            display: none;
+        }
+
+        /* -------------------------------------------------------------------------------------------*/
+
+        /* -- .search-form__field --------------------------------------------------------------------*/
+
+        /*
+            1. This to override normalize.
+
+            @TODO - box-sizing got a little jumbled somewhere.
+            Either I need to stick with content-box and adjust to the height to take into account
+            the padding, or I need to enforce border-box. The problem wwith this is that the class isn't
+            of a high-enough specifiity to override Normalise's setting of content-box.
+            Oddly, FF doesn't seem to make a difference - only Chrome.
+            UPDATE - enforced border-box (not using normalize anyway now).
+        */
         
-        @TODO - box-sizing got a little jumbled somewhere.
-        Either I need to stick with content-box and adjust to the height to take into account
-        the padding, or I need to enforce border-box. The problem wwith this is that the class isn't
-        of a high-enough specifiity to override Normalise's setting of content-box.
-        Oddly, FF doesn't seem to make a difference - only Chrome.
-    */
-    .search-form__field {
-        -webkit-appearance: none !important; /* [1] */
-        //-webkit-border-radius: 0px;
-        border-radius: 0px;
-        border: 0;
-        //-webkit-box-sizing: content-box;
-        -moz-box-sizing: content-box;
-        box-sizing: content-box;
+        .search-form .search-form__field {
+            -webkit-appearance: none !important; /* [1] */
+            //-webkit-border-radius: 0px;
+            border-radius: 0px;
+            border: 0;
+            //-webkit-box-sizing: content-box;
+            -moz-box-sizing: border-box !important;
+            box-sizing: border-box !important;
+
+            background-color: $fallback--search-form__field--bg-color;
+            height: $fallback--search-form--field-height;
+            line-height: $fallback--search-form--field-height;
+            margin: $fallback--search-form--spacing 0 $fallback--search-form--spacing $fallback--search-form--spacing;
+            padding: $fallback--search-form--spacing;
+
+            float: left;
+
+            //-moz-box-flex: 1;
+            -webkit-flex: 1 0 auto;
+                -ms-flex: 1 0 auto;
+                    flex: 1 0 auto;
+
+            ///* IE7- hacks (box-model height correction): */
+            //*height: $fallback--search-form--height / 2;
+            //*line-height: $fallback--search-form--height / 2;
+        }
+
+        .search-form .search-form__field:focus {
+            background-color: $fallback--search-form__field--bg-color--alt;
+        }
+
+        .search-form--right .search-form__field {
+            //-moz-box-ordinal-group: 2;
+                     -webkit-order: 2;
+                    -ms-flex-order: 2;
+                             order: 2;
+        }
         
-        background-color: $fallback--search-form__field--bg-color;
-        height: $fallback--search-form--field-height;
-        line-height: $fallback--search-form--field-height;
-        margin: $fallback--search-form--spacing 0 $fallback--search-form--spacing $fallback--search-form--spacing;
-        padding: $fallback--search-form--spacing;
 
-        float: left;
 
-        -webkit-flex: 1 0 auto;
-            -ms-flex: 1 0 auto;
-                flex: 1 0 auto;
-                
-        ///* IE7- hacks (box-model height correction): */
-        //*height: $fallback--search-form--height / 2;
-        //*line-height: $fallback--search-form--height / 2;
-    }
-    
-    .search-form__field:focus {
-        background-color: $fallback--search-form__field--bg-color--alt;
-    }
-    
-    .search-form--right .search-form__field {        
-         -webkit-order: 2;
-        -ms-flex-order: 2;
-                 order: 2;
-    }
+        /*
+            Opera Hacks (https://github.com/jeffclayton/css_hack_testing/blob/master/opera_9.5-12_hack.txt)
+            Opera Mini 7- ignores line height.
+            Opera Mini 8 seems to enforce a minimum font size for the search field which forces it to be
+            higher than it should be.
+            min-height and no padding seems to fix it.
+        */
+        _:-o-prefocus, body:last-child .search-form .search-form__field {
+            padding: 0;
+            min-height: $fallback--search-form--height;
+            ////@include fallback-rem(min-height, ($fallback--search-form--height + ($fallback--search-form--spacing * 2)));
+        }
 
-    /*
-        Opera Hacks (https://github.com/jeffclayton/css_hack_testing/blob/master/opera_9.5-12_hack.txt)
-        Opera Mini 7- ignores line height.
-        Opera Mini 8 seems to enforce a minimum font size for the search field which forces it to be
-        higher than it should be.
-        min-height and no padding seems to fix it.
-    */
-    _:-o-prefocus, body:last-child .search-form__field {
-        padding: 0;
-        min-height: $fallback--search-form--height;
-        ////@include fallback-rem(min-height, ($fallback--search-form--height + ($fallback--search-form--spacing * 2)));
-    }
 
-    
     /* -------------------------------------------------------------------------------------------*/
-    
+
     /* -- .search-form__submit -------------------------------------------------------------------*/
-    
+
     /*
         //1. IE 6/7 needs this.
     */
-    .search-form__submit {
+    .search-form .search-form__submit {
         -webkit-appearance: none;
         border-radius: 0;
         border: 0;
         //-webkit-box-sizing: content-box;
         -moz-box-sizing: content-box;
         box-sizing: content-box;
-        
+
         background: $fallback--search-form__submit--bg-color;
-        
-        height: $fallback--search-form--field-height;
+
+        height: $fallback--search-form--height;
         line-height: 0;
         //*line-height: 1.5; /* [1] */
-        
+
         margin: $fallback--search-form--spacing $fallback--search-form--spacing $fallback--search-form--spacing 0;
         padding:  0 ($fallback--search-form--spacing * 2);
-        
+
         float: left;
-        
+
+        //-moz-box-flex: 0;
         -webkit-flex: 0 1 auto;
             -ms-flex: 0 1 auto;
                 flex: 0 1 auto;
     }
 
-    .search-form__submit:hover,
-    .search-form__submit:focus {
+    .search-form .search-form__submit:hover,
+    .search-form .search-form__submit:focus {
         background-color: $fallback--search-form__submit--bg-color--alt;
     }
+  
 
-    
-    .search-form--right .search-form__submit {    
+    .search-form--right .search-form__submit {
+         //-moz-box-ordinal-group: 2;
          -webkit-order: 2;
         -ms-flex-order: 2;
                  order: 2;
     }
-    
-    
-    .search-form__submit svg {
-        height: $fallback--search-form--height / 2;
-        width: $fallback--search-form--height / 2;
-    }
-    
-    
-    /* PNG Fall-Back */    
-    .no-inlinesvg.datauri .search-form__submit:before {
+
+
+        .search-form .search-form__submit svg {
+            height: $fallback--search-form--field-height;
+            width: $fallback--search-form--field-height;
+        }
+
+
+    /* PNG Fall-Back */
+    .no-inlinesvg.datauri .search-form .search-form__submit:before {
         content: url($fallback--search-form__submit--png);
         //vertical-align: middle;
     }
-    
-    .no-inlinesvg.datauri .search-form__submit span {
+
+    .no-inlinesvg.datauri .search-form .search-form__submit span {
         display: none;
     }
 
 
     /* -------------------------------------------------------------------------------------------*/
-    
+
     /* -- .search-form__collapse -----------------------------------------------------------------*/
 
-    .search-form__collapse {          
-        
+    .search-form .search-form__collapse {
+
         list-style-type: none;
         padding: 0;
         margin: 0;
         float: left;
-        
+
+        //-moz-box-flex: 0;
         -webkit-box-flex: 0;
             -webkit-flex: 0 1 auto;
                 -ms-flex: 0 1 auto;
                     flex: 0 1 auto;
     }
-    
+
     /* -------------------------------------------------------------------------------------------*/
-    
-    
-        
+
+
+
     ///* IE8 hacks: */
     //@media \0screen {
-    //    
+    //
     //    .search-form--right .search-form__submit,
     //    .search-form--right .search-form__field {
     //        float: right;
     //    }
-    //    
+    //
     //    .search-form--right .search-form__field {
     //        margin-left: -340px; /* @var */
     //        margin-right: 20px; /* @var */
     //    }
     //}
-    
+
     /* IE9 hacks: */
     @media all and (min-width:0\0) and (min-resolution: .001dpcm)
     {
@@ -282,104 +302,120 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
         .search-form--right .search-form__field {
             float: right;
         }
-        
+
         .search-form--right .search-form__field {
             margin-left: -340px; /* @var */
             margin-right: 20px; /* @var */
         }
-        
+
     }
 
-    
+
 
 /* -- Enhanced layout --------------------------------------------------------------------------- */
     @media only screen and (max-width: ($fallback--search-form--breakpoint--enhanced - 1)) {
-        
+
         .search-form--right .search-form__submit,
         .search-form--right .search-form__field {
             float: left;
         }
-        
+
         .search-form--right .search-form__field {
             margin-left: $fallback--search-form--spacing;
             margin-right: 0;
         }
-        
-        .search-form__collapse {
+
+        .search-form .search-form__collapse {
             width: 100%;
         }
-        
-        
-        .no-flexbox .search-form {
+
+
+        /*.no-flexbox .search-form {
             display: block;
-        }
+        }*/
     }
-    
+
     @media only screen and (min-width: $fallback--search-form--breakpoint--enhanced) {
-    
+
         /*
-            Older FF (21-) flexbox doesn't support flex wrap so basic layout breaks. Adding old -moz 
+            Older FF (21-) flexbox doesn't support flex wrap so basic layout breaks. Adding old -moz
             flexbox for the enhanced width ONLY solves this problem.
+            PLUS, reinstate W3 flexbox or FF seems to apply the old stuff instead.
         */
         .search-form {
-            display: -moz-box;
             width: 100%;
+            display: -moz-box;
+            display: flex;
         }
-        
-        .search-form__field {
-            -moz-box-flex: 1;
-        }
-        
-        .search-form__submit {
-            -moz-box-flex: 0;
-        }
-        
-        .search-form__collapse {
-            -moz-box-flex: 0;
-        }
-        
-        .search-form__cancel {
-            -moz-box-flex: 0;
-            -moz-box-ordinal-group: 0;
-        }
-        
-        .search-form--right .search-form__field,
-        .search-form--right .search-form__submit {
-            -moz-box-ordinal-group: 2;
-        }
-    
 
-        .search-form__cancel {
-            display: none;
-            
+            .search-form .search-form__field {
+                -moz-box-flex: 1;
+                flex: 1 0 auto;
+            }
+
+            .search-form .search-form__submit {
+                -moz-box-flex: 0;
+                flex: 0 0 auto;
+            }
+
+            .search-form .search-form__collapse {
+                -moz-box-flex: 0;
+                flex: 0 0 auto;
+            }
+
+            .search-form .search-form__cancel {
+                -moz-box-flex: 0;
+                flex: 0 0 auto;
+                -moz-box-ordinal-group: 0;
+                order: 0;
+            }
+        
+
+            .search-form--right .search-form__field,
+            .search-form--right .search-form__submit {
+                -moz-box-ordinal-group: 2;
+                order: 2;
+            }
+
+
+
+        .search-form .search-form__cancel {
+            //display: none;
+
             background-color: $fallback--search-form__cancel--bg-color;
             padding-right: $fallback--search-form--spacing * 2;
             padding-left: $fallback--search-form--spacing * 2;
+            padding-top: 0;
+            padding-bottom: 0;
+            border: 0;
 
-            height: $fallback--search-form--height;
-            line-height: $fallback--search-form--height;
+            height: $fallback--search-form--field-height + ($fallback--search-form--spacing * 4);
+            line-height: $fallback--search-form--field-height + ($fallback--search-form--spacing * 4);
 
+            -moz-box-flex: 0;
             -webkit-flex: 0 0 auto;
                 -ms-flex: 0 0 auto;
                     flex: 0 0 auto;
-                    
+
+            -moz-box-ordinal-group: 0;
              -webkit-order: -1;
             -ms-flex-order: -1;
                      order: -1;
         }
-        
-        .search-form__cancel:hover,
-        .search-form__cancel:focus,
-        .search-form__cancel:active {
+
+        .search-form .search-form__cancel:hover,
+        .search-form .search-form__cancel:focus,
+        .search-form .search-form__cancel:active {
             background-color: $fallback--search-form__cancel--bg-color--alt;
         }
-        
-        .search-form__cancel:after {
-            content: url($fallback--search-form__cancel--svg);         
+
+        .search-form .search-form__cancel:after {
+            content: url($fallback--search-form__cancel--svg);
             display: inline-block;
-            vertical-align: middle;
-            width: $fallback--search-form--spacing * 2;
-            
+            vertical-align: text-bottom;
+            //vertical-align: middle;
+            width: $fallback--search-form__cancel--size;
+
             /* IE10-11 flexbox chokes without width: */
             /*width:  20px;*/
             /* IE11 flexbox stretches icon without height: */
@@ -388,25 +424,25 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
             line-height: 0;
         }
 
-        .search-form__field {
+        .search-form .search-form__field {
             width: auto;
         }
-        
+
         /*
             Expander
-        */        
-        .search-form__field:focus ~ .search-form__collapse {
+        */
+        .search-form .search-form__field:focus ~ .search-form__collapse {
             display: none;
         }
-        
+
         /*
             Cancel button
             Note: only necessary on some touch devices where it can be difficult to un-focus.
         */
-        .search-form__field:focus ~ .search-form__cancel {           
+        .search-form .search-form__field:focus ~ .search-form__cancel {
             display: block;
         }
-        
+
         /*
             Expander issue:
             Collapse block is hidden but search field doesn't expand so it looks weird.
@@ -414,32 +450,33 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
                 IE9 - had to use hack - see below.
                 FF3.5 - 21 (note - look into using the -moz prefix for flexbox in this case for 8+)
                 Safari6 (CSS Cutt-off won't load CSS for this browser so shouldn't be an issue any more)
-           
-            
-        
+
+
+
             --Modernizr adds the .flexbox class. If JS unavailable, expanding doesn't work.
             That's ok, but I may as well just have used JS to make the expanding working the first
             place!!!!??? :-(--
-            
+
             If no-flexbox, undo Expander and Cancel.
             Note, without JS the issue described above will still occur, but it's still usable.
 
         */
-        /*.no-flexbox .search-form__field:focus ~ .search-form__collapse {
+        .no-flexbox .search-form__field:focus ~ .search-form__collapse {
             display: block;
         }
-        
+
         .no-flexbox .search-form__field:focus ~ .search-form__cancel {
             display: none;
-        }*/
-        
-        
-        .search-form__collapse {          
+        }
+
+
+        .search-form .search-form__collapse {
             width: auto;
         }
+   
     }
-    
-    
+
+
     ///* IE8 hacks: */
     ///*
     //    Respond:
@@ -450,25 +487,25 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
     //        display: block;
     //    }
     //}
-    
+
     /* IE9 hacks: */
     /*
         Expander issue: Collapse block is hidden but search field doesn't expand so it looks weird.
     */
     @media #{$fallback--ie9--hack} {
-        .search-form__field:focus ~ .search-form__collapse {
-            display: block;
-        }
-        
-        .search-form__field:focus ~ .search-form__cancel {
-            display: none;
-        }
+            .search-form .search-form__field:focus ~ .search-form__collapse {
+                display: block;
+            }
+
+            .search-form .search-form__field:focus ~ .search-form__cancel {
+                display: none;
+            }
     }
-    
-    
-    
+
+
+
     /*
-    Older webkit browsers - those supporting the -webkit-box-flex syntax (Chrome 21-28, Maxthon) 
+    Older webkit browsers - those supporting the -webkit-box-flex syntax (Chrome 21-28, Maxthon)
     - don't let the flex declarations override floats properly, so the the floats applied above
     cause serious breakage, so we need to undo those floats.
     Also the vertical centering of the cancel icon doesn't work properly, so we provide a fix
@@ -478,7 +515,7 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
     However, older webkit (Safari, Android) baulk at this so following are some hacks to reset the float.
     Horrid but haven't found a better way yet.
     Can't use JS to detect these either, as it's totally broken if JS isn't available.
-    
+
     */
     /* no longer applies due to CSS Cutt-off
     @media screen and (-webkit-min-device-pixel-ratio: 0) {
