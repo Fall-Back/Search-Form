@@ -1,6 +1,11 @@
 @charset "UTF-8";
 /*------------------------------------------------------------------------------------------------*\
     Fall-Back Search Form Pattern v0.5
+    
+    Design for use with the basic [CSS Mustard Cut](https://github.com/Fall-Back/CSS-Mustard-Cut)
+    IE 9+, FF 8+, Opera 12, [Chrome 29+, Android ~4.4+]
+    Chrome 29+, Opera 16+, Safari 6.1+, iOS 7+, Android ~4.4+
+
 \*------------------------------------------------------------------------------------------------*/
 
 // Colours:
@@ -97,11 +102,11 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
             clear: both;
         }
     
-    /* IE7- hacks (can't use MQ else IE8's Respond applies it): */
-    .search-form {
-        *zoom: 1;
-        *padding-bottom: 5px;
-    }
+    ///* IE7- hacks (can't use MQ else IE8's Respond applies it): */
+    //.search-form {
+    //    *zoom: 1;
+    //    *padding-bottom: 5px;
+    //}
     
     /* -------------------------------------------------------------------------------------------*/
     
@@ -126,10 +131,11 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
     */
     .search-form__field {
         -webkit-appearance: none !important; /* [1] */
-        -webkit-border-radius: 0px;
+        //-webkit-border-radius: 0px;
         border-radius: 0px;
         border: 0;
-        -webkit-box-sizing: content-box;
+        //-webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
         box-sizing: content-box;
         
         background-color: $fallback--search-form__field--bg-color;
@@ -144,9 +150,9 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
             -ms-flex: 1 0 auto;
                 flex: 1 0 auto;
                 
-        /* IE7- hacks (box-model height correction): */
-        *height: $fallback--search-form--height / 2;
-        *line-height: $fallback--search-form--height / 2;
+        ///* IE7- hacks (box-model height correction): */
+        //*height: $fallback--search-form--height / 2;
+        //*line-height: $fallback--search-form--height / 2;
     }
     
     .search-form__field:focus {
@@ -178,20 +184,21 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
     /* -- .search-form__submit -------------------------------------------------------------------*/
     
     /*
-        1. IE 6/7 needs this.
+        //1. IE 6/7 needs this.
     */
     .search-form__submit {
         -webkit-appearance: none;
         border-radius: 0;
         border: 0;
-        -webkit-border-box: content-box;
-        border-box: content-box;
+        //-webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
         
         background: $fallback--search-form__submit--bg-color;
         
         height: $fallback--search-form--field-height;
         line-height: 0;
-        *line-height: 1.5; /* [1] */
+        //*line-height: 1.5; /* [1] */
         
         margin: $fallback--search-form--spacing $fallback--search-form--spacing $fallback--search-form--spacing 0;
         padding:  0 ($fallback--search-form--spacing * 2);
@@ -254,20 +261,19 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
     
     
         
-    /* IE8 hacks: */
-    @media \0screen {
-        
-        .search-form--right .search-form__submit,
-        .search-form--right .search-form__field {
-            float: right;
-        }
-        
-        .search-form--right .search-form__field {
-            margin-left: -340px; /* @var */
-            margin-right: 20px; /* @var */
-        }
-
-    }
+    ///* IE8 hacks: */
+    //@media \0screen {
+    //    
+    //    .search-form--right .search-form__submit,
+    //    .search-form--right .search-form__field {
+    //        float: right;
+    //    }
+    //    
+    //    .search-form--right .search-form__field {
+    //        margin-left: -340px; /* @var */
+    //        margin-right: 20px; /* @var */
+    //    }
+    //}
     
     /* IE9 hacks: */
     @media all and (min-width:0\0) and (min-resolution: .001dpcm)
@@ -312,7 +318,7 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
     @media only screen and (min-width: $fallback--search-form--breakpoint--enhanced) {
     
         /*
-            Older FF flexbox doesn't support flex wrap so basic layout breaks. Adding old -moz 
+            Older FF (21-) flexbox doesn't support flex wrap so basic layout breaks. Adding old -moz 
             flexbox for the enhanced width ONLY solves this problem.
         */
         .search-form {
@@ -434,16 +440,16 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
     }
     
     
-    /* IE8 hacks: */
-    /*
-        Respond:
-        Expander issue: Collapse block is hidden but search field doesn't expand so it looks weird.
-    */
-    @media \0screen {
-       .search-form__field:focus ~ .search-form__collapse {
-            display: block;
-        }
-    }
+    ///* IE8 hacks: */
+    ///*
+    //    Respond:
+    //    Expander issue: Collapse block is hidden but search field doesn't expand so it looks weird.
+    //*/
+    //@media \0screen {
+    //   .search-form__field:focus ~ .search-form__collapse {
+    //        display: block;
+    //    }
+    //}
     
     /* IE9 hacks: */
     /*
