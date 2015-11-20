@@ -105,13 +105,13 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
     }
 
 
-    .search-form:before,
-    .search-form:after {
+    .search-form::before,
+    .search-form::after {
         content: " ";
         display: table;
     }
 
-    .search-form:after {
+    .search-form::after {
         clear: both;
     }
 
@@ -273,10 +273,9 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
         float: left;
 
         //-moz-box-flex: 0;
-        -webkit-box-flex: 0;
-            -webkit-flex: 0 1 auto;
-                -ms-flex: 0 1 auto;
-                    flex: 0 1 auto;
+        -webkit-flex: 0 0 auto;
+            -ms-flex: 0 0 auto;
+                flex: 0 0 auto;
     }
 
     /* -------------------------------------------------------------------------------------------*/
@@ -409,6 +408,7 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
         .search-form .search-form__cancel:focus,
         .search-form .search-form__cancel:active {
             background-color: $fallback--search-form__cancel--bg-color--alt;
+            border: 0;
         }
 
         .search-form .search-form__cancel:after {
@@ -432,6 +432,7 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
 
         /*
             Expander
+            Note the selector appears not to work on FF27-. That's ok. Won't fix.
         */
         .search-form .search-form__field:focus ~ .search-form__collapse {
             display: none;
@@ -451,7 +452,7 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
             Affects: browsers that DON'T support flexbox, but DO support :focus ~ selector.
                 IE9 - had to use hack - see below.
                 FF3.5 - 21 (note - look into using the -moz prefix for flexbox in this case for 8+)
-                Safari6 (CSS Cutt-off won't load CSS for this browser so shouldn't be an issue any more)
+                Safari6 (CSS Cut-off won't load CSS for this browser so shouldn't be an issue any more)
 
 
 
