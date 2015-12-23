@@ -49,7 +49,8 @@ $fallback--search-form__cancel--size:          1em !default;
 
 // Breakpoints:
 
-$fallback--search-form--breakpoint--enhanced:  720px !default;
+$fallback--search-form--breakpoint--enhanced:  45em !default;
+//$fallback--search-form--breakpoint--enhanced:  720px !default;
 
 
 // SVG's
@@ -314,7 +315,7 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
 
 
 /* -- Enhanced layout --------------------------------------------------------------------------- */
-    @media only screen and (max-width: ($fallback--search-form--breakpoint--enhanced - 1)) {
+    @media only screen and (max-width: (minus1px($fallback--search-form--breakpoint--enhanced))) {
 
         .search-form--right .search-form__submit,
         .search-form--right .search-form__field {
