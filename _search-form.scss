@@ -1,10 +1,20 @@
 @charset "UTF-8";
 /*------------------------------------------------------------------------------------------------*\
-    Fall-Back Search Form Pattern v0.5
+    Fall-Back Search Form Pattern v0.6
 
     Design for use with the basic [CSS Mustard Cut](https://github.com/Fall-Back/CSS-Mustard-Cut)
     IE 9+, FF 8+, Opera 12, [Chrome 29+, Android ~4.4+]
     Chrome 29+, Opera 16+, Safari 6.1+, iOS 7+, Android ~4.4+
+    
+    ISSUES
+    
+    Firefox 8-27 are the main problem-causers here because of a buggy/incomplete flexbox
+    implementation. Below 28 FF doesn't suport felx-wrap even though it supports un-prefixed
+    flexbox properties.
+    The reason this is a problem is that in the basic view flex wrapping is required to force the
+    search input + button onto a different line from the collapsable area.
+    Using hacks to prevent 8-27 using flexbox for the basic view, and more hacks to reinstate it
+    for 28+.
 
 \*------------------------------------------------------------------------------------------------*/
 
@@ -49,7 +59,7 @@ $fallback--search-form__cancel--size:          1em !default;
 
 // Breakpoints:
 
-$fallback--search-form--breakpoint--enhanced:  45em !default;
+$fallback--search-form--breakpoint--enhanced:  50em !default;
 //$fallback--search-form--breakpoint--enhanced:  720px !default;
 
 
@@ -71,8 +81,8 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
     /*
         NOTES:
 
-        .search-form--right
-        It's not possible to easily re-create this variation so it won't be on the right in
+        .search-form--after
+        It's not possible to easily re-create this variation so it won't be after in
         non-flexbox browsers, but that's ok, it's still usable.
         IE 8 and 9 are forced into submission for this.
 
@@ -89,20 +99,32 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
     .search-form {
         background: $fallback--search-form--bg-color;
 
-        //display: -moz-box;
+        display: -moz-box;
         display: -webkit-flex;
         display: -ms-flexbox;
         display: flex;
         
         margin: 0;
         
-        //width: 100%;
+        width: 100%;
 
         -webkit-flex-wrap: wrap;
             -ms-flex-wrap: wrap;
                 flex-wrap: wrap;
 
         vertical-align: top;
+    }
+    // Reset flex display for FF8-27: ...
+    @media screen and (min--moz-device-pixel-ratio:0) and (min-resolution:.001dpcm) {
+        .search-form {
+            display: block;
+        }
+    }
+    // ... and put it back for FF28+
+    @supports (-moz-appearance:none) and (list-style-type:japanese-formal) {
+        .search-form {
+            display: flex;
+        }
     }
 
 
@@ -136,6 +158,8 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
 
         /*
             1. This to override normalize.
+            2. Overrize deafault size attr value - mainly for Opera mini which wierdley needs both 
+               width AND min-width.
 
             @TODO - box-sizing got a little jumbled somewhere.
             Either I need to stick with content-box and adjust to the height to take into account
@@ -162,22 +186,40 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
 
             float: left;
 
-            //-moz-box-flex: 1;
-            -webkit-flex: 1 0 auto;
-                -ms-flex: 1 0 auto;
-                    flex: 1 0 auto;
-
+            -moz-box-flex: 1;
+            -webkit-flex: 1 1 auto;
+                -ms-flex: 1 1 auto;
+                    flex: 1 1 auto;
+                    
+            
+            width: 1%; /* [2] */
+            min-width: 1%; /* [2] */
+                    
             ///* IE7- hacks (box-model height correction): */
             //*height: $fallback--search-form--height / 2;
             //*line-height: $fallback--search-form--height / 2;
+        }
+        
+        // Reset the width for FF8-27: ...
+        @media screen and (min--moz-device-pixel-ratio:0) and (min-resolution:.001dpcm) {
+            .search-form .search-form__field {
+                width: auto;
+            }
+        }
+        // ... and put it back for FF28+:
+        @supports (-moz-appearance:none) and (list-style-type:japanese-formal) {
+            .search-form .search-form__field {
+                width: 1%;
+            }
         }
 
         .search-form .search-form__field:focus {
             background-color: $fallback--search-form__field--bg-color--alt;
         }
 
-        .search-form--right .search-form__field {
-            //-moz-box-ordinal-group: 2;
+        .search-form--right .search-form__field, /* @deprecated - use after */
+        .search-form--after .search-form__field {
+            -moz-box-ordinal-group: 2;
                      -webkit-order: 2;
                     -ms-flex-order: 2;
                              order: 2;
@@ -192,11 +234,10 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
             higher than it should be.
             min-height and no padding seems to fix it.
         */
-        _:-o-prefocus, body:last-child .search-form .search-form__field {
+        /*_:-o-prefocus, body:last-child .search-form .search-form__field {
             padding: 0;
             min-height: $fallback--search-form--height;
-            ////@include fallback-rem(min-height, ($fallback--search-form--height + ($fallback--search-form--spacing * 2)));
-        }
+        }*/
 
 
     /* -------------------------------------------------------------------------------------------*/
@@ -225,10 +266,10 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
 
         float: left;
 
-        //-moz-box-flex: 0;
-        -webkit-flex: 0 1 auto;
-            -ms-flex: 0 1 auto;
-                flex: 0 1 auto;
+        -moz-box-flex: 0;
+        -webkit-flex: 0 0 auto;
+            -ms-flex: 0 0 auto;
+                flex: 0 0 auto;
     }
 
     .search-form .search-form__submit:hover,
@@ -237,7 +278,8 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
     }
   
 
-    .search-form--right .search-form__submit {
+    .search-form--right .search-form__submit, /* @deprecated - use after */
+    .search-form--after .search-form__submit {
          //-moz-box-ordinal-group: 2;
          -webkit-order: 2;
         -ms-flex-order: 2;
@@ -273,7 +315,8 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
         margin: 0;
         float: left;
 
-        //-moz-box-flex: 0;
+
+        -moz-box-flex: 0;
         -webkit-flex: 0 0 auto;
             -ms-flex: 0 0 auto;
                 flex: 0 0 auto;
@@ -300,12 +343,15 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
     /* IE9 hacks: */
     @media all and (min-width:0\0) and (min-resolution: .001dpcm)
     {
-        .search-form--right .search-form__submit,
-        .search-form--right .search-form__field {
+        .search-form--right .search-form__submit, /* @deprecated - use after */
+        .search-form--right .search-form__field,  /* @deprecated - use after */
+        .search-form--after .search-form__submit, /* @deprecated - use after */
+        .search-form--after .search-form__field {
             float: right;
         }
 
-        .search-form--right .search-form__field {
+        .search-form--right .search-form__field, /* @deprecated - use after */
+        .search-form--after .search-form__field {
             margin-left: -340px; /* @var */
             margin-right: 20px; /* @var */
         }
@@ -317,12 +363,15 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
 /* -- Enhanced layout --------------------------------------------------------------------------- */
     @media only screen and (max-width: (minus1px($fallback--search-form--breakpoint--enhanced))) {
 
-        .search-form--right .search-form__submit,
-        .search-form--right .search-form__field {
+        .search-form--right .search-form__submit, /* @deprecated - use after */
+        .search-form--right .search-form__field, /* @deprecated - use after */
+        .search-form--after .search-form__submit,
+        .search-form--after .search-form__field {
             float: left;
         }
 
-        .search-form--right .search-form__field {
+        .search-form--right .search-form__field, /* @deprecated - use after */
+        .search-form--after .search-form__field {
             margin-left: $fallback--search-form--spacing;
             margin-right: 0;
         }
@@ -340,11 +389,19 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
     @media only screen and (min-width: $fallback--search-form--breakpoint--enhanced) {
 
         /*
-            Older FF (21-) flexbox doesn't support flex wrap so basic layout breaks. Adding old -moz
-            flexbox for the enhanced width ONLY solves this problem.
-            PLUS, reinstate W3 flexbox or FF seems to apply the old stuff instead.
+            1. Reinstate all flexbox for enhanced view as no wrapping needs to occure
+            (FF8-27 issue describbed above)
         */
         .search-form {
+            display: -moz-box; /* [1] */
+            display: flex; /* [1] */
+
+            -webkit-flex-wrap: nowrap;
+                -ms-flex-wrap: nowrap;
+                    flex-wrap: nowrap;
+        }
+        
+        /*.search-form {
             width: 100%;
             display: -moz-box;
             display: flex;
@@ -352,7 +409,7 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
 
             .search-form .search-form__field {
                 -moz-box-flex: 1;
-                flex: 1 0 auto;
+                flex: 1 1 auto;
             }
 
             .search-form .search-form__submit {
@@ -371,14 +428,16 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
                 -moz-box-ordinal-group: 0;
                 order: 0;
             }
-        
+        */
 
-            .search-form--right .search-form__field,
-            .search-form--right .search-form__submit {
+            .search-form--right .search-form__field, /* @deprecated - use after */
+            .search-form--right .search-form__submit,
+            .search-form--after .search-form__field, /* @deprecated - use after */
+            .search-form--after .search-form__submit {/* @deprecated - use after */
                 -moz-box-ordinal-group: 2;
                 order: 2;
             }
-
+        
 
 
         .search-form .search-form__cancel {
