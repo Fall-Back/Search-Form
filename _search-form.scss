@@ -247,16 +247,7 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
         .search-form .search-form__field:focus {
             background-color: $fallback--search-form__field--bg-color--alt;
         }
-
-        .search-form--right .search-form__field, /* @deprecated - use after */
-        .search-form--after .search-form__field {
-            -moz-box-ordinal-group: 2;
-                     -webkit-order: 2;
-                    -ms-flex-order: 2;
-                             order: 2;
-        }
         
-
 
         /*
             Opera Hacks (https://github.com/jeffclayton/css_hack_testing/blob/master/opera_9.5-12_hack.txt)
@@ -310,9 +301,18 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
     }
   
 
-    .search-form--right .search-form__submit, /* @deprecated - use after */
+    /*.search-form--right .search-form__submit, /* @deprecated - use after *
     .search-form--after .search-form__submit {
          //-moz-box-ordinal-group: 2;
+         -webkit-order: 2;
+        -ms-flex-order: 2;
+                 order: 2;
+    }*/
+    .search-form--right .search-form__field, /* @deprecated - use after */
+    .search-form--right .search-form__submit, /* @deprecated - use after */
+    .search-form--after .search-form__field, 
+    .search-form--after .search-form__submit {
+        -moz-box-ordinal-group: 2;
          -webkit-order: 2;
         -ms-flex-order: 2;
                  order: 2;
@@ -463,13 +463,13 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
             }
         */
 
-            .search-form--right .search-form__field, /* @deprecated - use after */
-            .search-form--right .search-form__submit,
-            .search-form--after .search-form__field, /* @deprecated - use after */
-            .search-form--after .search-form__submit {/* @deprecated - use after */
+            /*.search-form--right .search-form__field, /* @deprecated - use after *
+            .search-form--right .search-form__submit, /* @deprecated - use after *
+            .search-form--after .search-form__field, 
+            .search-form--after .search-form__submit {
                 -moz-box-ordinal-group: 2;
                 order: 2;
-            }
+            }*/
         
 
 
