@@ -1,8 +1,8 @@
 @charset "UTF-8";
 /*------------------------------------------------------------------------------------------------*\
-    Fall-Back Search Form Pattern v1.0
+    Fall-Back Search Form Pattern v0.6
 
-    Designed for use with the basic [CSS Mustard Cut](https://github.com/Fall-Back/CSS-Mustard-Cut)
+    Design for use with the basic [CSS Mustard Cut](https://github.com/Fall-Back/CSS-Mustard-Cut)
     IE 9+, FF 8+, Opera 12, [Chrome 29+, Android ~4.4+]
     Chrome 29+, Opera 16+, Safari 6.1+, iOS 7+, Android ~4.4+
     
@@ -24,9 +24,11 @@
 // - base-ui colour (if set)
 // - otherwise #999
 // - but can be specifically overridden
-$t: #999;
+$t: false;
 @if variable-exists(fallback--base-ui-color) {
     $t: $fallback--base-ui-color;
+} @else {
+    $t: #999;
 }
 $fallback--search-form--ui-color:              $t !default;
 
@@ -38,7 +40,6 @@ $fallback--search-form__field--bg-color--alt:  #ffffdc !default;
 $fallback--search-form__submit--bg-color:      lighten($fallback--search-form--ui-color, 30%) !default;// lighten($fallback--search-form--ui-color, 70%) !default;
 $fallback--search-form__submit--bg-color--alt: darken($fallback--search-form__submit--bg-color, 10%) !default;
 
-$fallback--search-form__cancel--color:         #333 !default;
 $fallback--search-form__cancel--bg-color:      lighten($fallback--search-form--ui-color, 20%) !default;
 $fallback--search-form__cancel--bg-color--alt: darken($fallback--search-form__cancel--bg-color, 10%) !default;
 
@@ -49,9 +50,6 @@ $fallback--search-form--font-size:             $fallback--base-font-size !defaul
 $fallback--search-form--field-height:          $fallback--base-em-ratio * 1em !default;
 $fallback--search-form--spacing:               $fallback--search-form--field-height / 8 !default;
 $fallback--search-form--height:                $fallback--search-form--field-height + ($fallback--search-form--spacing * 2) !default;
-
-$fallback--search-bar--height:                 $fallback--search-form--height + ($fallback--search-form--spacing * 2) !default;
-$fallback--search-bar-button--spacing:        $fallback--search-bar--height / 8 !default;
 
 $fallback--search-form__cancel--size:          1em !default;
 //$fallback--search-form--height:               $fallback--base-line-height * 1.5em;//1.71428571429em; //($fallback--base-em-ratio * 2em) !default; // 3.42857142858
@@ -445,19 +443,15 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
         .search-form .search-form__cancel {
             //display: none;
 
-            color: $fallback--search-form__cancel--color;
             background-color: $fallback--search-form__cancel--bg-color;
-            padding: ($fallback--search-bar-button--spacing * 1.333333) ($fallback--search-bar-button--spacing * 2);
-            /*padding-right: $fallback--search-form--spacing * 2;
+            padding-right: $fallback--search-form--spacing * 2;
             padding-left: $fallback--search-form--spacing * 2;
             padding-top: 0;
-            padding-bottom: 0;*/
+            padding-bottom: 0;
             border: 0;
 
-            //height: $fallback--search-form--field-height + ($fallback--search-form--spacing * 4);
-            //height: $fallback--search-bar--height;
-            //line-height: $fallback--search-form--field-height + ($fallback--search-form--spacing * 4);
-            //line-height: $fallback--search-bar--height;
+            height: $fallback--search-form--field-height + ($fallback--search-form--spacing * 4);
+            line-height: $fallback--search-form--field-height + ($fallback--search-form--spacing * 4);
 
             -moz-box-flex: 0;
             -webkit-flex: 0 0 auto;
@@ -477,20 +471,20 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
             border: 0;
         }
 
-        //.search-form .search-form__cancel:after {
-        //    content: url($fallback--search-form__cancel--svg);
-        //    display: inline-block;
-        //    vertical-align: text-bottom;
-        //    //vertical-align: middle;
-        //    width: $fallback--search-form__cancel--size;
-        //
-        //    /* IE10-11 flexbox chokes without width: */
-        //    /*width:  20px;*/
-        //    /* IE11 flexbox stretches icon without height: */
-        //    /*height:  20px;*/
-        //    /* But now blink pushes the icon to the bottom without line-height: 0. */
-        //    line-height: 0;
-        //}
+        .search-form .search-form__cancel:after {
+            content: url($fallback--search-form__cancel--svg);
+            display: inline-block;
+            vertical-align: text-bottom;
+            //vertical-align: middle;
+            width: $fallback--search-form__cancel--size;
+
+            /* IE10-11 flexbox chokes without width: */
+            /*width:  20px;*/
+            /* IE11 flexbox stretches icon without height: */
+            /*height:  20px;*/
+            /* But now blink pushes the icon to the bottom without line-height: 0. */
+            line-height: 0;
+        }
 
         .search-form .search-form__field {
             width: auto;
@@ -498,35 +492,20 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
 
         /*
             Expander
-            --Note the selector appears not to work on FF27-. That's ok. Won't fix.--
-            (Only apply if flexbox is supported - older/prefixed support ignored, but that's ok)
+            Note the selector appears not to work on FF27-. That's ok. Won't fix.
         */
-        @supports (display:flex)  {
-            .search-form .search-form__field:focus ~ .search-form__collapse {
-                display: none;
-            }
-        }
-        // Hack to apply to IE10-11:
-        _:-ms-input-placeholder, :root .search-form .search-form__field:focus ~ .search-form__collapse {
+        .search-form .search-form__field:focus ~ .search-form__collapse {
             display: none;
         }
-        
+
         /*
             Cancel button
             Note: only necessary on some touch devices where it can be difficult to un-focus.
         */
-        @supports (display:flex)  {
-            .search-form .search-form__field:focus ~ .search-form__cancel {
-                display: block;
-            }
-        }
-        
-        // Hack to apply to IE10-11:
-        _:-ms-input-placeholder, :root .search-form .search-form__field:focus ~ .search-form__cancel {
+        .search-form .search-form__field:focus ~ .search-form__cancel {
             display: block;
         }
-        
-        
+
         /*
             Expander issue:
             Collapse block is hidden but search field doesn't expand so it looks weird.
@@ -545,18 +524,18 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
             Note, without JS the issue described above will still occur, but it's still usable.
 
         */
-        /*.no-flexbox .search-form__field:focus ~ .search-form__collapse {
+        .no-flexbox .search-form__field:focus ~ .search-form__collapse {
             display: block;
         }
 
         .no-flexbox .search-form__field:focus ~ .search-form__cancel {
             display: none;
-        }*/
+        }
 
 
-        /*.search-form .search-form__collapse {
+        .search-form .search-form__collapse {
             width: auto;
-        }*/
+        }
    
     }
 
@@ -576,7 +555,7 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
     /*
         Expander issue: Collapse block is hidden but search field doesn't expand so it looks weird.
     */
-    /*@media #{$fallback--ie9--hack} {
+    @media #{$fallback--ie9--hack} {
             .search-form .search-form__field:focus ~ .search-form__collapse {
                 display: block;
             }
@@ -584,7 +563,7 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
             .search-form .search-form__field:focus ~ .search-form__cancel {
                 display: none;
             }
-    }*/
+    }
 
 
 
