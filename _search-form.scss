@@ -17,30 +17,58 @@
     for 28+.
 
 \*------------------------------------------------------------------------------------------------*/
+/*
+$fallback--base-ui-color: #008080 !default; // teal, #008080, rgb(0,128,128)
+
+
+$fallback--base-background-color: #fff !default;
+$fallback--base-text-color: #333 !default; 
+
+*/
 
 // Colours:
 
-// Slightly hacky way of allowing the main UI colour of this pattern to be:
-// - base-ui colour (if set)
-// - otherwise #999
-// - but can be specifically overridden
+// Slightly hacky way of allowing the main UI colours of this pattern to be:
+// - the relevent Fall-Back colour (if set)
+// - otherwise a basic useable (preview) colour
+// - but that can be specifically overridden before importing this file
 $t: #999;
 @if variable-exists(fallback--base-ui-color) {
     $t: $fallback--base-ui-color;
 }
-$fallback--search-form--ui-color:              $t !default;
+$fallback--search-form--base-ui-color:         $t !default;
 
-$fallback--search-form--bg-color:              $fallback--search-form--ui-color !default;//lighten($fallback--search-form--ui-color, 60%) !default;
 
-$fallback--search-form__field--bg-color:       #fff !default;
+$t: #fff;
+@if variable-exists(fallback--base-background-color) {
+    $t: $fallback--base-background-color;
+}
+$fallback--search-form--base-background-color: $t !default;
+
+
+$t: #333;
+@if variable-exists(fallback--base-text-color) {
+    $t: $fallback--base-text-color;
+}
+$fallback--search-form--base-text-color:       $t !default;
+
+
+$fallback--search-form--bg-color:              $fallback--search-form--base-ui-color !default;//lighten($fallback--search-form--base-ui-color, 60%) !default;
+
+
+$fallback--search-form__field--bg-color:       $fallback--search-form--base-background-color !default;
 $fallback--search-form__field--bg-color--alt:  #ffffdc !default;
+$fallback--search-form__field--text-color:     $fallback--search-form--base-text-color !default;
 
-$fallback--search-form__submit--bg-color:      lighten($fallback--search-form--ui-color, 30%) !default;// lighten($fallback--search-form--ui-color, 70%) !default;
-$fallback--search-form__submit--bg-color--alt: darken($fallback--search-form__submit--bg-color, 10%) !default;
 
-$fallback--search-form__cancel--color:         #333 !default;
-$fallback--search-form__cancel--bg-color:      lighten($fallback--search-form--ui-color, 20%) !default;
-$fallback--search-form__cancel--bg-color--alt: darken($fallback--search-form__cancel--bg-color, 10%) !default;
+$fallback--search-form__submit--bg-color:      lighten($fallback--search-form--base-ui-color, 50%) !default;// lighten($fallback--search-form--base-ui-color, 70%) !default;
+$fallback--search-form__submit--bg-color--alt: darken($fallback--search-form__submit--bg-color, 30%) !default;
+$fallback--search-form__submit--text-color:    $fallback--search-form--base-text-color !default;
+
+
+$fallback--search-form__cancel--bg-color:      lighten($fallback--search-form--base-ui-color, 50%) !default;
+$fallback--search-form__cancel--bg-color--alt: darken($fallback--search-form__cancel--bg-color, 30%) !default;
+$fallback--search-form__cancel--text-color:    $fallback--search-form--base-text-color !default;
 
 
 // Sizes:
@@ -51,7 +79,7 @@ $fallback--search-form--spacing:               $fallback--search-form--field-hei
 $fallback--search-form--height:                $fallback--search-form--field-height + ($fallback--search-form--spacing * 2) !default;
 
 $fallback--search-bar--height:                 $fallback--search-form--height + ($fallback--search-form--spacing * 2) !default;
-$fallback--search-bar-button--spacing:        $fallback--search-bar--height / 8 !default;
+$fallback--search-bar-button--spacing:         $fallback--search-bar--height / 8 !default;
 
 $fallback--search-form__cancel--size:          1em !default;
 //$fallback--search-form--height:               $fallback--base-line-height * 1.5em;//1.71428571429em; //($fallback--base-em-ratio * 2em) !default; // 3.42857142858
@@ -86,9 +114,9 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
         .search-form--after
         It's not possible to easily re-create this variation so it won't be after in
         non-flexbox browsers, but that's ok, it's still usable.
-        IE 8 and 9 are forced into submission for this.
+        These browsers (IE9, FF8-27) are forced into submission for this.
 
-        Nesting is to increase specificity.
+        Nesting is to increase specificity over Start-CSS's element selectors.
         This helps to override things link Normalize and Cleanse.
 
     */
@@ -160,7 +188,7 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
 
         /*
             1. This to override normalize.
-            2. Overrize deafault size attr value - mainly for Opera mini which wierdley needs both 
+            2. Override default size attr value - mainly for Opera mini which wierdley needs both 
                width AND min-width.
 
             @TODO - box-sizing got a little jumbled somewhere.
@@ -172,15 +200,16 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
         */
         
         .search-form .search-form__field {
-            -webkit-appearance: none !important; /* [1] */
+            /*-webkit-appearance: none !important; /* [1] */
             //-webkit-border-radius: 0px;
-            border-radius: 0px;
+            border-radius: 0;
             border: 0;
             //-webkit-box-sizing: content-box;
-            -moz-box-sizing: border-box !important;
-            box-sizing: border-box !important;
+            /*-moz-box-sizing: border-box !important;
+            box-sizing: border-box !important;*/
 
             background-color: $fallback--search-form__field--bg-color;
+            color: $fallback--search-form__field--text-color;
             height: $fallback--search-form--field-height;
             line-height: $fallback--search-form--field-height;
             margin: $fallback--search-form--spacing 0 $fallback--search-form--spacing $fallback--search-form--spacing;
@@ -250,14 +279,15 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
         //1. IE 6/7 needs this.
     */
     .search-form .search-form__submit {
-        -webkit-appearance: none;
+        /*-webkit-appearance: none;*/
         border-radius: 0;
         border: 0;
         //-webkit-box-sizing: content-box;
-        -moz-box-sizing: content-box;
-        box-sizing: content-box;
+        /*moz-box-sizing: content-box;
+        box-sizing: content-box;*/
 
         background: $fallback--search-form__submit--bg-color;
+        color: $fallback--search-form__submit--text-color;
 
         height: $fallback--search-form--height;
         line-height: 0;
@@ -347,7 +377,7 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
     {
         .search-form--right .search-form__submit, /* @deprecated - use after */
         .search-form--right .search-form__field,  /* @deprecated - use after */
-        .search-form--after .search-form__submit, /* @deprecated - use after */
+        .search-form--after .search-form__submit,
         .search-form--after .search-form__field {
             float: right;
         }
@@ -356,6 +386,7 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
         .search-form--after .search-form__field {
             margin-left: -340px; /* @var */
             margin-right: 20px; /* @var */
+            width: auto;
         }
 
     }
@@ -445,9 +476,10 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
         .search-form .search-form__cancel {
             //display: none;
 
-            color: $fallback--search-form__cancel--color;
+            color: $fallback--search-form__cancel--text-color;
             background-color: $fallback--search-form__cancel--bg-color;
-            padding: ($fallback--search-bar-button--spacing * 1.333333) ($fallback--search-bar-button--spacing * 2);
+            padding: 0 ($fallback--search-bar-button--spacing * 2);
+            //padding: ($fallback--search-bar-button--spacing * 1.333333) ($fallback--search-bar-button--spacing * 2);
             /*padding-right: $fallback--search-form--spacing * 2;
             padding-left: $fallback--search-form--spacing * 2;
             padding-top: 0;
@@ -517,13 +549,14 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
         */
         @supports (display:flex)  {
             .search-form .search-form__field:focus ~ .search-form__cancel {
-                display: block;
+                display: flex;
             }
         }
         
         // Hack to apply to IE10-11:
         _:-ms-input-placeholder, :root .search-form .search-form__field:focus ~ .search-form__cancel {
-            display: block;
+            display: -ms-flexbox;
+            display: flex;
         }
         
         
