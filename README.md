@@ -37,7 +37,7 @@ Expanding Example
             </svg>
         </span>
     </button>
-    <a href="#" tabindex="-1" class="search-form__cancel"></a>
+    <a href="#" tabindex="-1" class="search-form__cancel  icon-wrap  js-no-history"><svg width="0" height="0" class="icon"><use xlink:href="#icon-cross"></use></svg></a>
     <ul class="search-form__adjacent">
         <li>
             <a href="#">A Link</a>
