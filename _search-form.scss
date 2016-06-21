@@ -5,6 +5,10 @@
     Designed for use with the basic [CSS Mustard Cut](https://github.com/Fall-Back/CSS-Mustard-Cut)
     IE 9+, FF 8+, Opera 12, [Chrome 29+, Android ~4.4+]
     Chrome 29+, Opera 16+, Safari 6.1+, iOS 7+, Android ~4.4+
+
+    Any double-classing (e.g. `.class.class`) is deliberatly in place in order to increase specifity.
+    This allows Start-CSS declarations to be overidden.
+    E.g. `.{patten}__open.{patten}__open` overrides `a[href]`.
     
     ISSUES
     
@@ -17,41 +21,38 @@
     for 28+.
 
 \*------------------------------------------------------------------------------------------------*/
-/*
-$fallback--base-ui-color: #008080 !default; // teal, #008080, rgb(0,128,128)
 
+/*------------------------------------------------------------------------------------------------*\
+    Import Fall-Back vars:
 
-$fallback--base-background-color: #fff !default;
-$fallback--base-text-color: #333 !default; 
-
-*/
-
-// Colours:
-
-// Slightly hacky way of allowing the main UI colours of this pattern to be:
-// - the relevent Fall-Back colour (if set)
-// - otherwise a basic useable (preview) colour
-// - but that can be specifically overridden before importing this file
+    Slightly hacky way of allowing the main UI colour of this pattern to be:
+     - base-ui colour (if set)
+     - otherwise #999
+     - but can be specifically overridden
+\*------------------------------------------------------------------------------------------------*/
 $t: #999;
 @if variable-exists(fallback--base-ui-color) {
     $t: $fallback--base-ui-color;
 }
 $fallback--search-form--base-ui-color:         $t !default;
 
-
-$t: #fff;
-@if variable-exists(fallback--base-background-color) {
-    $t: $fallback--base-background-color;
-}
-$fallback--search-form--base-background-color: $t !default;
-
-
+// Do the same for the base text colour: ...
 $t: #333;
 @if variable-exists(fallback--base-text-color) {
     $t: $fallback--base-text-color;
 }
 $fallback--search-form--base-text-color:       $t !default;
 
+// ... and the background colour:
+$t: #fff;
+@if variable-exists(fallback--base-background-color) {
+    $t: $fallback--base-background-color;
+}
+$fallback--search-form--base-background-color: $t !default;
+/*------------------------------------------------------------------------------------------------*/
+
+
+// Colours:
 
 $fallback--search-form--bg-color:              $fallback--search-form--base-ui-color !default;//lighten($fallback--search-form--base-ui-color, 60%) !default;
 
