@@ -49,6 +49,13 @@ $t: #fff;
     $t: $fallback--base-background-color;
 }
 $fallback--search-form--base-background-color: $t !default;
+
+// Same thing for the breakpoint:
+$t: 50em;
+@if variable-exists(fallback--breakpoint--enhanced) {
+    $t: $fallback--breakpoint--enhanced;
+}
+$fallback--search-form--breakpoint--enhanced: $t !default;
 /*------------------------------------------------------------------------------------------------*/
 
 
@@ -87,11 +94,6 @@ $fallback--search-form__cancel--size:          1em !default;
 
 //$fallback--search-form--spacing:              ($fallback--search-form--height / 8) !default;
 
-
-// Breakpoints:
-
-$fallback--search-form--breakpoint--enhanced:  50em !default;
-//$fallback--search-form--breakpoint--enhanced:  720px !default;
 
 
 // SVG's
