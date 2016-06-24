@@ -9,9 +9,9 @@
     Any double-classing (e.g. `.class.class`) is deliberatly in place in order to increase specifity.
     This allows Start-CSS declarations to be overidden.
     E.g. `.{pattern}__open.{pattern}__open` overrides `a[href]`.
-    
+
     ISSUES
-    
+
     Firefox 8-27 are the main problem-causers here because of a buggy/incomplete flexbox
     implementation. Below 28 FF doesn't suport felx-wrap even though it supports un-prefixed
     flexbox properties.
@@ -134,9 +134,9 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
         display: -webkit-flex;
         display: -ms-flexbox;
         display: flex;
-        
+
         margin: 0;
-        
+
         width: 100%;
 
         -webkit-flex-wrap: wrap;
@@ -189,7 +189,7 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
 
         /*
             1. This to override normalize.
-            2. Override default size attr value - mainly for Opera mini which wierdley needs both 
+            2. Override default size attr value - mainly for Opera mini which wierdley needs both
                width AND min-width.
 
             @TODO - box-sizing got a little jumbled somewhere.
@@ -199,7 +199,7 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
             Oddly, FF doesn't seem to make a difference - only Chrome.
             UPDATE - enforced border-box (not using normalize anyway now).
         */
-        
+
         .search-form .search-form__field {
             /*-webkit-appearance: none !important; /* [1] */
             //-webkit-border-radius: 0px;
@@ -222,16 +222,16 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
             -webkit-flex: 1 1 auto;
                 -ms-flex: 1 1 auto;
                     flex: 1 1 auto;
-                    
-            
+
+
             width: 1%; /* [2] */
             min-width: 1%; /* [2] */
-                    
+
             ///* IE7- hacks (box-model height correction): */
             //*height: $fallback--search-form--height / 2;
             //*line-height: $fallback--search-form--height / 2;
         }
-        
+
         // Reset the width for FF8-27: ...
         @media screen and (min--moz-device-pixel-ratio:0) and (min-resolution:.001dpcm) {
             .search-form .search-form__field {
@@ -248,7 +248,7 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
         .search-form .search-form__field:focus {
             background-color: $fallback--search-form__field--bg-color--alt;
         }
-        
+
 
         /*
             Opera Hacks (https://github.com/jeffclayton/css_hack_testing/blob/master/opera_9.5-12_hack.txt)
@@ -300,7 +300,7 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
     .search-form .search-form__submit:focus {
         background-color: $fallback--search-form__submit--bg-color--alt;
     }
-  
+
 
     /*.search-form--right .search-form__submit, /* @deprecated - use after *
     .search-form--after .search-form__submit {
@@ -311,7 +311,7 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
     }*/
     .search-form--right .search-form__field, /* @deprecated - use after */
     .search-form--right .search-form__submit, /* @deprecated - use after */
-    .search-form--after .search-form__field, 
+    .search-form--after .search-form__field,
     .search-form--after .search-form__submit {
         -moz-box-ordinal-group: 2;
          -webkit-order: 2;
@@ -434,7 +434,7 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
                 -ms-flex-wrap: nowrap;
                     flex-wrap: nowrap;
         }
-        
+
         /*.search-form {
             width: 100%;
             display: -moz-box;
@@ -466,12 +466,12 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
 
             /*.search-form--right .search-form__field, /* @deprecated - use after *
             .search-form--right .search-form__submit, /* @deprecated - use after *
-            .search-form--after .search-form__field, 
+            .search-form--after .search-form__field,
             .search-form--after .search-form__submit {
                 -moz-box-ordinal-group: 2;
                 order: 2;
             }*/
-        
+
 
 
         .search-form .search-form__cancel {
@@ -543,7 +543,7 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
         _:-ms-input-placeholder, :root .search-form .search-form__field:focus ~ .search-form__collapse {
             display: none;
         }
-        
+
         /*
             Cancel button
             Note: only necessary on some touch devices where it can be difficult to un-focus.
@@ -553,14 +553,14 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
                 display: flex;
             }
         }
-        
+
         // Hack to apply to IE10-11:
         _:-ms-input-placeholder, :root .search-form .search-form__field:focus ~ .search-form__cancel {
             display: -ms-flexbox;
             display: flex;
         }
-        
-        
+
+
         /*
             Expander issue:
             Collapse block is hidden but search field doesn't expand so it looks weird.
@@ -591,7 +591,7 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
         /*.search-form .search-form__collapse {
             width: auto;
         }*/
-   
+
     }
 
 
