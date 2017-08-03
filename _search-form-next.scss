@@ -1,3 +1,37 @@
+//  Fall-Back Start-CSS Settings v1.0.0
+/*------------------------------------------------------------------------------------------------*\
+\*------------------------------------------------------------------------------------------------*/
+
+
+$fallback--root-font-size: 16px !default;
+$fallback--base-font-size: 16px !default;
+$fallback--base-line-height: 24px !default; // 1.25
+
+$fallback--base-em-ratio: $fallback--base-line-height / $fallback--base-font-size; // 1.71428571429
+$fallback--root-font-size-percent: ($fallback--root-font-size / 16px) * 100;
+//@debug $fallback--base-line-height;
+//@debug ($fallback--base-line-height / $fallback--root-font-size);
+//@debug ($fallback--base-line-height / $fallback--root-font-size) * 1rem;
+
+$fallback--base-rem-space-unit: ($fallback--base-line-height / $fallback--root-font-size) * 1rem;
+$fallback--base-rem-1px: 1px / $fallback--root-font-size * 1rem;
+//$fallback--base-rem-1px: 0.0625rem;
+
+$fallback--base-font-family: sans-serif !default;
+// Consider:
+//$fallback--base-font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif !default;
+// https://bitsofco.de/the-new-system-font-stack/ https://github.com/necolas/normalize.css/issues/665
+
+
+//$fallback--base-ui-color: #FF8C00 !default; // darkorange #FF8C00 rgb(255,140,0)
+//$fallback--base-ui-color: #2F4F4F !default; // teal, #008080, rgb(0,128,128)
+$fallback--base-ui-color: #663399 !default; //rebeccapurple #663399 rgb(102,51,153)
+
+$fallback--base-background-color: #fff !default;
+$fallback--base-text-color: #333 !default;
+
+$fallback--breakpoint--enhanced: 50em !default;
+
 // Fall-Back Search Form Pattern v2.0.0
 /*------------------------------------------------------------------------------------------------*\
 
@@ -93,7 +127,7 @@ $fallback--search-form__cancel--size:          1em !default;
 
 //$fallback--search-form--spacing:              ($fallback--search-form--height / 8) !default;
 
-
+$fallback--search-form-max-width:               25em !default;
 
 // SVG's
 
@@ -171,6 +205,11 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
     }
 
 
+    .search-form---restrict-width {
+        max-width: $fallback--search-form-max-width;
+    }
+
+
         /* -------------------------------------------------------------------------------------------*/
 
         /* -- .search-form__cancel -------------------------------------------------------------------*/
@@ -192,7 +231,7 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
         .search-form .search-form__field {
 			position: relative;
 			z-index: 1;
-		
+
             /*-webkit-appearance: none !important; /* [1] */
             //-webkit-border-radius: 0px;
             border-radius: 0;
@@ -237,7 +276,7 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
             }
         }
 
-        
+
 		.search-form .search-form__field:focus {
             background-color: $fallback--search-form__field--bg-color--alt;
         }
@@ -269,7 +308,7 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
     .search-form .search-form__submit {
 		position: relative;
 		z-index: 1;
-	
+
         /*-webkit-appearance: none;*/
         border-radius: 0;
         border: 0;
