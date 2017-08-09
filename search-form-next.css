@@ -1,12 +1,22 @@
-/*------------------------------------------------------------------------------------------------*\*------------------------------------------------------------------------------------------------*/
-/*------------------------------------------------------------------------------------------------*
-    Designed for use with the basic [CSS Mustard Cut](https://github.com/Fall-Back/CSS-Mustard-Cut)
+/*-------------------------------------------------------------------------------------------------|
+    Fall-Back Start-CSS Settings v1.0.0
+
+    Fall-Back is designed for use with the basic
+    [CSS Mustard Cut](https://github.com/Fall-Back/CSS-Mustard-Cut)
+    
+    This determines a browser support base of:
+    
     IE 9+, FF 8+, Opera 12, [Chrome 29+, Android ~4.4+]
     Chrome 29+, Opera 16+, Safari 6.1+, iOS 7+, Android ~4.4+
-
-    Any double-classing (e.g. `.class.class`) is deliberatly in place in order to increase specifity.
+    
+    
+    Any double-classing (e.g. `.class.class`) is deliberate and intended to increase specifity.
     This allows Start-CSS declarations to be overidden.
-    E.g. `.{pattern}__open.{pattern}__open` overrides `a[href]`.
+    E.g. `.{pattern}__open.{pattren}__open` overrides `a[href]`.
+    
+|-------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------|
+    Fall-Back Search Form Pattern v2.0.0
 
     ISSUES
 
@@ -18,15 +28,7 @@
     Using hacks to prevent 8-27 using flexbox for the basic view, and more hacks to reinstate it
     for 28+.
 
-\*------------------------------------------------------------------------------------------------*/
-/*------------------------------------------------------------------------------------------------*    Import Fall-Back vars:
-
-    Slightly hacky way of allowing the main UI colour of this pattern to be:
-     - base-ui colour (if set)
-     - otherwise #999
-     - but can be specifically overridden
-\*------------------------------------------------------------------------------------------------*/
-/*------------------------------------------------------------------------------------------------*/
+|-------------------------------------------------------------------------------------------------*/
 /* -- Basic/fallback layout --------------------------------------------------------------------- */
 /*
         NOTES:
@@ -76,13 +78,13 @@
 .search-form---restrict-width {
   max-width: 25em; }
 
-/* -------------------------------------------------------------------------------------------*/
-/* -- .search-form__cancel -------------------------------------------------------------------*/
+/* ---------------------------------------------------------------------------------------*/
+/* -- .search-form__cancel ---------------------------------------------------------------*/
 /*.search-form .search-form__cancel {
             display: none;
         }*/
-/* -------------------------------------------------------------------------------------------*/
-/* -- .search-form__field --------------------------------------------------------------------*/
+/* ---------------------------------------------------------------------------------------*/
+/* -- .search-form__field ----------------------------------------------------------------*/
 /*
             1. This to override normalize.
             2. Override default size attr value - mainly for Opera mini which wierdley needs both
@@ -273,7 +275,7 @@
             //display: none;
 
             color: $fallback--search-form__cancel--text-color;
-            background-color: $fallback--search-form__cancel--bg-color;
+            background-color: $fallback--search-form__cancel--background-color;
             padding: 0 ($fallback--search-bar-button--spacing * 2);
             //padding: ($fallback--search-bar-button--spacing * 1.333333) ($fallback--search-bar-button--spacing * 2);
             /*padding-right: $fallback--search-form--spacing * 2;
@@ -301,7 +303,7 @@
         .search-form .search-form__cancel:hover,
         .search-form .search-form__cancel:focus,
         .search-form .search-form__cancel:active {
-            background-color: $fallback--search-form__cancel--bg-color--alt;
+            background-color: $fallback--search-form__cancel--background-color--alt;
             border: 0;
         }*/
   .search-form .search-form__field {

@@ -1,47 +1,49 @@
-//  Fall-Back Start-CSS Settings v1.0.0
-/*------------------------------------------------------------------------------------------------*\
-\*------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------|
+    Fall-Back Start-CSS Settings v1.0.0
 
+    Fall-Back is designed for use with the basic
+    [CSS Mustard Cut](https://github.com/Fall-Back/CSS-Mustard-Cut)
+    
+    This determines a browser support base of:
+    
+    IE 9+, FF 8+, Opera 12, [Chrome 29+, Android ~4.4+]
+    Chrome 29+, Opera 16+, Safari 6.1+, iOS 7+, Android ~4.4+
+    
+    
+    Any double-classing (e.g. `.class.class`) is deliberate and intended to increase specifity.
+    This allows Start-CSS declarations to be overidden.
+    E.g. `.{pattern}__open.{pattren}__open` overrides `a[href]`.
+    
+|-------------------------------------------------------------------------------------------------*/
 
-$fallback--root-font-size: 16px !default;
-$fallback--base-font-size: 16px !default;
-$fallback--base-line-height: 24px !default; // 1.25
+$fallback--root-font-size:         16px !default;
+$fallback--base-font-size:         16px !default;
+$fallback--base-line-height:       24px !default; // 1.25
 
-$fallback--base-em-ratio: $fallback--base-line-height / $fallback--base-font-size; // 1.71428571429
+$fallback--base-em-ratio:          $fallback--base-line-height / $fallback--base-font-size; // 1.71428571429
 $fallback--root-font-size-percent: ($fallback--root-font-size / 16px) * 100;
 //@debug $fallback--base-line-height;
 //@debug ($fallback--base-line-height / $fallback--root-font-size);
 //@debug ($fallback--base-line-height / $fallback--root-font-size) * 1rem;
 
-$fallback--base-rem-space-unit: ($fallback--base-line-height / $fallback--root-font-size) * 1rem;
-$fallback--base-rem-1px: 1px / $fallback--root-font-size * 1rem;
-//$fallback--base-rem-1px: 0.0625rem;
+$fallback--base-rem-space-unit:    ($fallback--base-line-height / $fallback--root-font-size) * 1rem;
+$fallback--base-rem-1px:           1px / $fallback--root-font-size * 1rem;
 
-$fallback--base-font-family: sans-serif !default;
+$fallback--base-font-family:       sans-serif !default;
 // Consider:
-//$fallback--base-font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif !default;
+//$fallback--base-font-family:       -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif !default;
 // https://bitsofco.de/the-new-system-font-stack/ https://github.com/necolas/normalize.css/issues/665
 
 
-//$fallback--base-ui-color: #FF8C00 !default; // darkorange #FF8C00 rgb(255,140,0)
-//$fallback--base-ui-color: #2F4F4F !default; // teal, #008080, rgb(0,128,128)
-$fallback--base-ui-color: #663399 !default; //rebeccapurple #663399 rgb(102,51,153)
+$fallback--base-ui-color:          #663399 !default; //rebeccapurple #663399 rgb(102,51,153)
 
-$fallback--base-background-color: #fff !default;
-$fallback--base-text-color: #333 !default;
+$fallback--base-background-color:  #fff !default;
+$fallback--base-text-color:        #333 !default;
 
-$fallback--breakpoint--enhanced: 50em !default;
+$fallback--breakpoint--enhanced:   50em !default;
 
-// Fall-Back Search Form Pattern v2.0.0
-/*------------------------------------------------------------------------------------------------*\
-
-    Designed for use with the basic [CSS Mustard Cut](https://github.com/Fall-Back/CSS-Mustard-Cut)
-    IE 9+, FF 8+, Opera 12, [Chrome 29+, Android ~4.4+]
-    Chrome 29+, Opera 16+, Safari 6.1+, iOS 7+, Android ~4.4+
-
-    Any double-classing (e.g. `.class.class`) is deliberatly in place in order to increase specifity.
-    This allows Start-CSS declarations to be overidden.
-    E.g. `.{pattern}__open.{pattern}__open` overrides `a[href]`.
+/*-------------------------------------------------------------------------------------------------|
+    Fall-Back Search Form Pattern v2.0.0
 
     ISSUES
 
@@ -53,94 +55,63 @@ $fallback--breakpoint--enhanced: 50em !default;
     Using hacks to prevent 8-27 using flexbox for the basic view, and more hacks to reinstate it
     for 28+.
 
-\*------------------------------------------------------------------------------------------------*/
+|-------------------------------------------------------------------------------------------------*/
 
-/*------------------------------------------------------------------------------------------------*\
-    Import Fall-Back vars:
-
-    Slightly hacky way of allowing the main UI colour of this pattern to be:
-     - base-ui colour (if set)
-     - otherwise #999
-     - but can be specifically overridden
-\*------------------------------------------------------------------------------------------------*/
-$t: #999;
-@if variable-exists(fallback--base-ui-color) {
-    $t: $fallback--base-ui-color;
-}
-$fallback--search-form--base-ui-color:         $t !default;
-
-// Do the same for the base text colour: ...
-$t: #333;
-@if variable-exists(fallback--base-text-color) {
-    $t: $fallback--base-text-color;
-}
-$fallback--search-form--base-text-color:       $t !default;
-
-// ... and the background colour:
-$t: #fff;
-@if variable-exists(fallback--base-background-color) {
-    $t: $fallback--base-background-color;
-}
-$fallback--search-form--base-background-color: $t !default;
-
-// Same thing for the breakpoint:
-$t: 50em;
-@if variable-exists(fallback--breakpoint--enhanced) {
-    $t: $fallback--breakpoint--enhanced;
-}
-$fallback--search-form--breakpoint--enhanced: $t !default;
-/*------------------------------------------------------------------------------------------------*/
+$fallback--search-form--breakpoint--enhanced:  $fallback--breakpoint--enhanced;
 
 
 // Colours:
 
-$fallback--search-form--bg-color:              $fallback--search-form--base-ui-color !default;//lighten($fallback--search-form--base-ui-color, 60%) !default;
+$fallback--search-form--base-ui-color:                 $fallback--base-ui-color !default;
+$fallback--search-form--base-text-color:               $fallback--base-text-color !default;
+
+$fallback--search-form--background-color:              $fallback--search-form--base-ui-color !default;
 
 
-$fallback--search-form__field--bg-color:       $fallback--search-form--base-background-color !default;
-$fallback--search-form__field--bg-color--alt:  #ffffdc !default;
-$fallback--search-form__field--text-color:     $fallback--search-form--base-text-color !default;
+$fallback--search-form__field--background-color:       $fallback--base-background-color !default;
+$fallback--search-form__field--background-color--alt:  #ffffdc !default;
+$fallback--search-form__field--text-color:             $fallback--search-form--base-text-color !default;
 
 
-$fallback--search-form__submit--bg-color:      lighten($fallback--search-form--base-ui-color, 50%) !default;// lighten($fallback--search-form--base-ui-color, 70%) !default;
-$fallback--search-form__submit--bg-color--alt: $fallback--search-form__submit--bg-color !default;
-$fallback--search-form__submit--text-color:    $fallback--search-form--base-text-color !default;
+$fallback--search-form__submit--background-color:      lighten($fallback--search-form--base-ui-color, 50%) !default;// lighten($fallback--search-form--base-ui-color, 70%) !default;
+$fallback--search-form__submit--background-color--alt: $fallback--search-form__submit--background-color !default;
+$fallback--search-form__submit--text-color:            $fallback--search-form--base-text-color !default;
 
 
-$fallback--search-form__cancel--bg-color:      lighten($fallback--search-form--base-ui-color, 50%) !default;
-$fallback--search-form__cancel--bg-color--alt: darken($fallback--search-form__cancel--bg-color, 30%) !default;
-$fallback--search-form__cancel--text-color:    $fallback--search-form--base-text-color !default;
+$fallback--search-form__cancel--background-color:      lighten($fallback--search-form--base-ui-color, 50%) !default;
+$fallback--search-form__cancel--background-color--alt: darken($fallback--search-form__cancel--background-color, 30%) !default;
+$fallback--search-form__cancel--text-color:            $fallback--search-form--base-text-color !default;
 
 
 // Sizes:
 
-$fallback--search-form--font-size:             $fallback--base-font-size !default;
-$fallback--search-form--field-height:          $fallback--base-em-ratio * 1em !default;
-$fallback--search-form--spacing:               $fallback--search-form--field-height / 8 !default;
-$fallback--search-form--height:                $fallback--search-form--field-height + ($fallback--search-form--spacing * 2) !default;
+$fallback--search-form--font-size:                     $fallback--base-font-size !default;
+$fallback--search-form--field-height:                  $fallback--base-em-ratio * 1em !default;
+$fallback--search-form--spacing:                       $fallback--search-form--field-height / 8 !default;
+$fallback--search-form--height:                        $fallback--search-form--field-height + ($fallback--search-form--spacing * 2) !default;
 
-$fallback--search-bar--height:                 $fallback--search-form--height + ($fallback--search-form--spacing * 2) !default;
-$fallback--search-bar-button--spacing:         $fallback--search-bar--height / 8 !default;
+$fallback--search-bar--height:                         $fallback--search-form--height + ($fallback--search-form--spacing * 2) !default;
+$fallback--search-bar-button--spacing:                 $fallback--search-bar--height / 8 !default;
 
-$fallback--search-form__cancel--size:          1em !default;
-//$fallback--search-form--height:               $fallback--base-line-height * 1.5em;//1.71428571429em; //($fallback--base-em-ratio * 2em) !default; // 3.42857142858
+$fallback--search-form__cancel--size:                  1em !default;
+//$fallback--search-form--height:                        $fallback--base-line-height * 1.5em;//1.71428571429em; //($fallback--base-em-ratio * 2em) !default; // 3.42857142858
 
-//$fallback--search-form--spacing:              ($fallback--search-form--height / 8) !default;
+//$fallback--search-form--spacing:                       ($fallback--search-form--height / 8) !default;
 
-$fallback--search-form-max-width:               25em !default;
+$fallback--search-form-max-width:                      25em !default;
 
 // SVG's
 
-$fallback--search-form__cancel--svg:           "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMCAyMCI+PHBhdGggZmlsbD0iIzQ0NCIgZD0iTTIwIDIuMDJMMTcuOTggMCAxMCA3Ljk4IDIuMDIgMCAwIDIuMDIgNy45OCAxMCAwIDE3Ljk4IDIuMDIgMjAgMTAgMTIuMDIgMTcuOTggMjAgMjAgMTcuOTggMTIuMDIgMTAgMjAgMi4wMnoiLz48L3N2Zz4=" !default;
+//$fallback--search-form__cancel--svg:                   "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMCAyMCI+PHBhdGggZmlsbD0iIzQ0NCIgZD0iTTIwIDIuMDJMMTcuOTggMCAxMCA3Ljk4IDIuMDIgMCAwIDIuMDIgNy45OCAxMCAwIDE3Ljk4IDIuMDIgMjAgMTAgMTIuMDIgMTcuOTggMjAgMjAgMTcuOTggMTIuMDIgMTAgMjAgMi4wMnoiLz48L3N2Zz4=" !default;
 
 
 // Fall-Back PNG's:
 
-$fallback--search-form__submit--png:           "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABTklEQVQ4T6VT21GDQBTNAv9qBaEDSQUij3+pQNMBnUgHagXJPw+3A0kFxg5SAA/P2VlmFtw4ZmQmA7t377nnsREr40mSJMfyEb9Ab7fjOBZ1Xb+Z58xvwUUYhtee570bjcvzbdd191LK07KgAOI4boUQt5j2hWXe933Lfdd1yaRAbY13W1XV5geApv3MZjQGyylkByAOWA/DsG2a5nUmwZieQevephVnHgCws7EQYDCyCRpvbBq1Rz48+uQ3ZCjZ0/N/gEskwKcDZE4RKxIiiqInx3FeUDzCxM0ZEz/ggW81cRHjEQdz+HHgPnQzWsbo26YrBtokRiV5F2wpsFnXJMAzk+XMUcohgwmIjWTA7JGWBPgdo0R9W5alumwzANv0ac+8UAA9ASRDpPLPAARK0zRAM5lccU1TLwJgE6SEePGPt1JMfqN9rqajLwCw/wY2tMxY4fByDwAAAABJRU5ErkJggg==" !default;
+//$fallback--search-form__submit--png:                   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABTklEQVQ4T6VT21GDQBTNAv9qBaEDSQUij3+pQNMBnUgHagXJPw+3A0kFxg5SAA/P2VlmFtw4ZmQmA7t377nnsREr40mSJMfyEb9Ab7fjOBZ1Xb+Z58xvwUUYhtee570bjcvzbdd191LK07KgAOI4boUQt5j2hWXe933Lfdd1yaRAbY13W1XV5geApv3MZjQGyylkByAOWA/DsG2a5nUmwZieQevephVnHgCws7EQYDCyCRpvbBq1Rz48+uQ3ZCjZ0/N/gEskwKcDZE4RKxIiiqInx3FeUDzCxM0ZEz/ggW81cRHjEQdz+HHgPnQzWsbo26YrBtokRiV5F2wpsFnXJMAzk+XMUcohgwmIjWTA7JGWBPgdo0R9W5alumwzANv0ac+8UAA9ASRDpPLPAARK0zRAM5lccU1TLwJgE6SEePGPt1JMfqN9rqajLwCw/wY2tMxY4fByDwAAAABJRU5ErkJggg==" !default;
 
 
 // MQ hacks:
-$fallback--ie9--hack:                          "all and (min-width:0\0) and (min-resolution: .001dpcm)" !default;
+$fallback--ie9--hack:                                  "all and (min-width:0\0) and (min-resolution: .001dpcm)" !default;
 
 /* -- Basic/fallback layout --------------------------------------------------------------------- */
 
@@ -163,7 +134,7 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
         1. Prevent extra bottom space when form is inside a container.
     */
     .search-form.search-form {
-        background: $fallback--search-form--bg-color;
+        background: $fallback--search-form--background-color;
 
         display: -moz-box;
         display: -webkit-flex;
@@ -210,17 +181,17 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
     }
 
 
-        /* -------------------------------------------------------------------------------------------*/
+        /* ---------------------------------------------------------------------------------------*/
 
-        /* -- .search-form__cancel -------------------------------------------------------------------*/
+        /* -- .search-form__cancel ---------------------------------------------------------------*/
 
         /*.search-form .search-form__cancel {
             display: none;
         }*/
 
-        /* -------------------------------------------------------------------------------------------*/
+        /* ---------------------------------------------------------------------------------------*/
 
-        /* -- .search-form__field --------------------------------------------------------------------*/
+        /* -- .search-form__field ----------------------------------------------------------------*/
 
         /*
             1. This to override normalize.
@@ -240,7 +211,7 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
             /*-moz-box-sizing: border-box !important;
             box-sizing: border-box !important;*/
 
-            background-color: $fallback--search-form__field--bg-color;
+            background-color: $fallback--search-form__field--background-color;
             color: $fallback--search-form__field--text-color;
             height: $fallback--search-form--field-height;
             line-height: $fallback--search-form--field-height;
@@ -278,7 +249,7 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
 
 
 		.search-form .search-form__field:focus {
-            background-color: $fallback--search-form__field--bg-color--alt;
+            background-color: $fallback--search-form__field--background-color--alt;
         }
 
 		// Give input left spacing when appropriate:
@@ -316,7 +287,7 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
         /*moz-box-sizing: content-box;
         box-sizing: content-box;*/
 
-        background: $fallback--search-form__submit--bg-color;
+        background: $fallback--search-form__submit--background-color;
         color: $fallback--search-form__submit--text-color;
 
         height: $fallback--search-form--height;
@@ -335,7 +306,7 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
 
     .search-form .search-form__submit:hover,
     .search-form .search-form__submit:focus {
-        background-color: $fallback--search-form__submit--bg-color--alt;
+        background-color: $fallback--search-form__submit--background-color--alt;
     }
 
 
@@ -483,7 +454,7 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
             //display: none;
 
             color: $fallback--search-form__cancel--text-color;
-            background-color: $fallback--search-form__cancel--bg-color;
+            background-color: $fallback--search-form__cancel--background-color;
             padding: 0 ($fallback--search-bar-button--spacing * 2);
             //padding: ($fallback--search-bar-button--spacing * 1.333333) ($fallback--search-bar-button--spacing * 2);
             /*padding-right: $fallback--search-form--spacing * 2;
@@ -511,7 +482,7 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
         .search-form .search-form__cancel:hover,
         .search-form .search-form__cancel:focus,
         .search-form .search-form__cancel:active {
-            background-color: $fallback--search-form__cancel--bg-color--alt;
+            background-color: $fallback--search-form__cancel--background-color--alt;
             border: 0;
         }*/
 
