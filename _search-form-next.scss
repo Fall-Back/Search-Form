@@ -11,8 +11,9 @@
 
 
     Any double-classing (e.g. `.class.class`) is deliberate and intended to increase specifity.
-    This allows Start-CSS declarations to be overidden.
-    E.g. `.{pattern}__open.{pattren}__open` overrides `a[href]`.
+    This allows any applicable Start-CSS declarations to be overidden.
+    E.g. `.{pattern} .{pattern}__child` would `a[href]`, but just `.{pattern}` wouldn't, so we use
+    `.{pattern}.{pattren}`
 
 |-------------------------------------------------------------------------------------------------*/
 
@@ -28,6 +29,7 @@ $fallback--root-font-size-percent: ($fallback--root-font-size / 16px) * 100;
 
 $fallback--base-rem-space-unit:    ($fallback--base-line-height / $fallback--root-font-size) * 1rem;
 $fallback--base-rem-1px:           1px / $fallback--root-font-size * 1rem;
+$fallback--base-em-1px:            1px / $fallback--root-font-size * 1em;
 
 $fallback--base-font-family:       sans-serif !default;
 // Consider:
@@ -248,12 +250,7 @@ $fallback--search-form-max-width:                      25em !default;
 
 /* ********************************************************************************************** */
 /* -- Enhanced layout --------------------------------------------------------------------------- */
-    // Leave here until I decide what to do about minus1px.
-    // Option 1: Ignore it. Does this cause any overlap problems?
-    // Option 2: Include the funtion in THIS file.
-    // Option 3: Create a common functions setup in the same was as settings.
-    //@media only screen and (max-width: (minus1px($fallback--search-form--breakpoint--enhanced))) {
-    @media only screen and (max-width: $fallback--search-form--breakpoint--enhanced) {
+    @media only screen and (max-width: ($fallback--search-form--breakpoint--enhanced - $fallback--base-em-1px)) {
 
 
         .search-form .search-form__collapse {
