@@ -238,11 +238,11 @@ $fallback--search-form-max-width:                      25em !default;
         background-color: $fallback--search-form__submit--background-color--alt;
     }
 
-
-        .search-form .search-form__submit svg {
+        // This should really be handled by whatever icon system is in place, so no sure about this.
+        /*.search-form .search-form__submit svg {
             height: $fallback--search-form--field-height;
             width: $fallback--search-form--field-height;
-        }
+        }*/
 
     /* -------------------------------------------------------------------------------------------*/
 
